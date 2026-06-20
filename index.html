@@ -162,6 +162,12 @@
   .qg-banner{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:12px;letter-spacing:-.01em}
   .qg-banner:active{transform:scale(.99)}
   .qg-banner span{font-size:13px;opacity:.85}
+  .today-box{display:flex;align-items:center;gap:16px;background:var(--ink);color:#fff;border-radius:16px;padding:15px 20px;margin-bottom:14px}
+  .today-box .td-col{flex:1}
+  .today-box .td-date{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.6);text-transform:uppercase}
+  .today-box .td-n{font-size:27px;font-weight:800;line-height:1}
+  .today-box .td-lab{font-size:12.5px;color:rgba(255,255,255,.72)}
+  .today-box .td-div{width:1px;align-self:stretch;background:rgba(255,255,255,.16)}
   .row-between{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:24px 0 12px}
   .row-between .sec-t.sm{margin:0}
   .mini-copy{background:var(--green-soft);border:1px solid #cfe3bf;color:var(--green-deep);border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap}
@@ -308,6 +314,7 @@
     <div class="sec-eb">OVERVIEW · 자동 합산</div>
     <div class="sec-t">종합 현황</div>
     <div class="signboard" id="sb-home"></div>
+    <div class="today-box" id="todayBox"></div>
     <div class="rstat-grid" id="rstats"></div>
     <div class="row-between"><div class="sec-t sm">전체 면접자 <span id="ccount-home" style="font-family:var(--mono);color:var(--green-deep)"></span></div><button class="mini-copy" onclick="copySheetAll()">📋 전체 시트 복사</button></div>
     <div class="clist" id="clist-home"></div>
@@ -527,10 +534,21 @@ function fetchSheet(manual){
   const url=effSheetUrl();
   if(!url){ sheetRows=[]; sheetState='idle'; renderSheetLog(); return; }
   sheetState='loading'; if(manual) renderSheetLog();
-  fetch(url).then(r=>r.json()).then(d=>{ sheetRows=(d&&d.rows)?d.rows:[]; sheetUpdated=Date.now(); sheetState='ok'; renderSheetLog(); reconcileDeletions(); })
+  fetch(url).then(r=>r.json()).then(d=>{ sheetRows=(d&&d.rows)?d.rows:[]; sheetUpdated=Date.now(); sheetState='ok'; renderSheetLog(); reconcileDeletions(); reconcileStatus(); })
     .catch(e=>{ sheetState='err'; renderSheetLog(); });
 }
 window.fetchSheet=fetchSheet;
+/* 인터뷰로그에서 쇼업(O) 체크 → 앱 면접자 상태도 쇼업으로 반영 (앱→시트는 sheetPush가 처리) */
+function reconcileStatus(){
+  if(sheetState!=='ok'||!sheetRows.length) return;
+  const byId={}; sheetRows.forEach(r=>{ if(r.id) byId[r.id]=r; });
+  let changed=false;
+  candList().forEach(c=>{
+    const sr=byId[c.id]; if(!sr) return;
+    if(sr.status==='쇼업' && c.status==='부킹'){ writeCandidate(Object.assign({},c,{status:'쇼업'})); changed=true; }
+  });
+  if(changed){ renderHome(); RECRUITERS.forEach(r=>renderPerson(r.id)); }
+}
 /* 인터뷰로그에서 행을 지우면 앱에서도 삭제 반영 (안전 가드: 이전에 시트에 있던 앱 항목만) */
 function reconcileDeletions(){
   if(sheetState!=='ok'||!sheetRows.length) return;
@@ -622,7 +640,12 @@ window.toggleSheet=toggleSheet;
 function sheetPush(action,c,opts){
   const url=effSheetUrl(); if(!url) return;
   const r=recMeta(c.recruiter)||{};
-  const payload={ action:action, id:c.id, rec:r.name||'', plat:c.platform||'', book:fmtD(c.bookDate)||'', intd:fmtD(c.intDate)||'', time:c.intTime||'', nm:'NM', io:c.inout||'', name:c.name||'', age:fmtAge(c.age)||'', gender:c.gender||'', tel:fmtTel(c.tel)||'', code:r.code||'', memo:c.memo||'' };
+  const plat=c.platform||'';
+  let io=c.inout||'';
+  if(plat.includes('당근')) io='IN';            // 당근 = 인바운드
+  else if(plat==='알바몬') io='OUT';            // 알바몬 = 아웃바운드
+  const show=(c.status==='쇼업'||c.status==='스타트')?'O':'';
+  const payload={ action:action, id:c.id, rec:r.name||'', plat:plat, book:fmtD(c.bookDate)||'', intd:fmtD(c.intDate)||'', show:show, time:c.intTime||'', nm:'NM', io:io, name:c.name||'', age:fmtAge(c.age)||'', gender:c.gender||'', tel:fmtTel(c.tel)||'', code:r.code||'', memo:c.memo||'' };
   try{
     fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow'})
       .then(()=>{ if(!opts||!opts.noRefresh) setTimeout(()=>fetchSheet(false),1500); }).catch(()=>{});
@@ -640,6 +663,8 @@ function buildStatics(){
     if(tel) tel.addEventListener('input',()=>{ const p=tel.selectionStart, atEnd=(p===tel.value.length); tel.value=liveTel(tel.value); if(!atEnd){} });
     const tm=document.getElementById('mIntTime');
     if(tm) tm.addEventListener('input',()=>{ tm.value=fmtTime(tm.value); });
+    const mp=document.getElementById('mPlatform');
+    if(mp) mp.addEventListener('change',()=>autoIO(mp.value));
     RECRUITERS.forEach(r=>{
       const body=document.getElementById('qgrid-'+r.id);
       if(body) body.addEventListener('input',e=>{
@@ -783,6 +808,11 @@ function fillSignboard(el,s){
 function renderHome(){
   const all=combinedCands(), s=statsFor(all);
   const el=document.getElementById('sb-home'); el.innerHTML=signboardHTML(s,'전체 (앱+시트)'); fillSignboard(el,s);
+  const td=all.filter(c=>isToday(c.intDate) && c.status!=='거절');
+  const tdShow=td.filter(c=>c.status==='쇼업'||c.status==='스타트').length;
+  const dt=new Date(), dstr=(dt.getMonth()+1)+'월 '+dt.getDate()+'일';
+  const tb=document.getElementById('todayBox');
+  if(tb) tb.innerHTML=`<div class="td-col"><div class="td-date">오늘 면접 · ${dstr}</div><div style="display:flex;align-items:baseline;gap:5px;margin-top:5px"><span class="td-n">${td.length}</span><span class="td-lab">명</span></div></div><div class="td-div"></div><div class="td-col"><div class="td-date">오늘 쇼업</div><div style="display:flex;align-items:baseline;gap:5px;margin-top:5px"><span class="td-n" style="color:#7FD45A">${tdShow}</span><span class="td-lab">명</span></div></div>`;
   document.getElementById('rstats').innerHTML=RECRUITERS.map(r=>{
     const st=statsFor(combinedFor(r.id));
     return `<div class="rstat" onclick="go('${r.id}')">
@@ -899,14 +929,15 @@ function pickInout(v){ mForm.inout=v; segOn('mInout','io',v); }
 function pickStatus(s){ mForm.status=s; segOn('mStatus','s',s); }
 function segOn(box,attr,val){ document.querySelectorAll('#'+box+' button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-'+attr)===val)); }
 window.pickGender=pickGender; window.pickInout=pickInout; window.pickStatus=pickStatus;
+function autoIO(p){ p=p||''; if(p.includes('당근')){ mForm.inout='IN'; segOn('mInout','io','IN'); } else if(p==='알바몬'){ mForm.inout='OUT'; segOn('mInout','io','OUT'); } }
 function setRecTag(id){ const r=recMeta(id); const t=document.getElementById('mRecTag'); t.className='rec-tag'; t.style.background=r.soft; t.style.color=r.deep; t.innerHTML=mascotSVG(r,false)+' 담당 — '+r.name+(r.role?' '+r.role:''); }
 function openAdd(recId){
   editingId=null; document.getElementById('modalTitle').textContent=recMeta(recId).name+' · 면접자 추가';
-  mForm={recruiter:recId,gender:'남',status:'부킹',platform:'알바몬',inout:'IN'};
+  mForm={recruiter:recId,gender:'남',status:'부킹',platform:'알바몬',inout:'OUT'};
   ['mName','mAge','mTel','mIntDate','mIntTime','mMemo'].forEach(i=>document.getElementById(i).value='');
   document.getElementById('mBookDate').value=todayStr();
   document.getElementById('mPlatform').value='알바몬';
-  setRecTag(recId); segOn('mGender','g','남'); segOn('mInout','io','IN'); segOn('mStatus','s','부킹');
+  setRecTag(recId); segOn('mGender','g','남'); segOn('mStatus','s','부킹'); autoIO('알바몬');
   document.getElementById('modal').classList.add('on');
 }
 window.openAdd=openAdd;
@@ -918,7 +949,7 @@ function openEdit(id){
   document.getElementById('mTel').value=c.tel||''; document.getElementById('mBookDate').value=c.bookDate||todayStr();
   document.getElementById('mIntDate').value=c.intDate||''; document.getElementById('mIntTime').value=c.intTime||''; document.getElementById('mMemo').value=c.memo||'';
   document.getElementById('mPlatform').value=c.platform||'알바몬';
-  setRecTag(c.recruiter); segOn('mGender','g',mForm.gender); segOn('mInout','io',mForm.inout); segOn('mStatus','s',mForm.status);
+  setRecTag(c.recruiter); segOn('mGender','g',mForm.gender); segOn('mInout','io',mForm.inout); segOn('mStatus','s',mForm.status); autoIO(c.platform||'알바몬');
   document.getElementById('modal').classList.add('on');
 }
 window.openEdit=openEdit;
@@ -1047,6 +1078,16 @@ window.saveDbUrl=saveDbUrl;
 /* ════════ 유틸 ════════ */
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function fmtD(s){ if(!s)return''; const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s); return m?(parseInt(m[2])+'/'+parseInt(m[3])):esc(s); }
+function isToday(s){
+  if(!s) return false; s=String(s).trim();
+  const d=new Date();
+  const iso=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const md=(d.getMonth()+1)+'/'+d.getDate();
+  if(s===iso||s===md) return true;
+  const m=/^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(s);
+  if(m && (parseInt(m[2],10)+'/'+parseInt(m[3],10))===md) return true;
+  return false;
+}
 function digitsTel(t){ return String(t||'').replace(/[^0-9]/g,''); }
 function fmtTel(t){
   const d=digitsTel(t);
