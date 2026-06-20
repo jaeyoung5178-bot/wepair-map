@@ -351,6 +351,7 @@
       <input id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec">
       <button class="sbtn" onclick="saveSheetUrl()">저장 / 연동</button>
       <div class="smsg" id="sheetMsgEl"></div>
+      <div id="sheetActiveUrl" style="font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:8px;word-break:break-all"></div>
     </div>
   </div>
 
@@ -599,7 +600,7 @@ function saveSheetUrl(){
   if(v&&!/^https:\/\//.test(v)){ msg.style.color='#E08070'; msg.textContent='주소는 https:// 로 시작해야 합니다.'; return; }
   DATA.sheetUrl=v; writeKey('sheetUrl');
   msg.style.color='#7FD45A'; msg.textContent=v?'연동됨 — 불러오는 중…':'연동 해제됨';
-  startSheetPolling();
+  renderInfo(); startSheetPolling();
 }
 window.saveSheetUrl=saveSheetUrl;
 
@@ -898,6 +899,9 @@ function renderInfo(){
   setVal(document.getElementById('albaId'),DATA.albaId);
   setVal(document.getElementById('albaPw'),DATA.albaPw);
   setVal(document.getElementById('sheetUrlInput'),DATA.sheetUrl);
+  const au=document.getElementById('sheetActiveUrl');
+  if(au){ const u=effSheetUrl(); const custom=!!(DATA.sheetUrl||'').trim();
+    au.textContent='지금 앱이 쓰는 주소: '+(u?('…/'+u.split('/macros/s/')[1] ):'(없음)')+(custom?'  ✅ 직접 지정':'  (기본 내장)'); }
   document.querySelectorAll('#schedBox input').forEach(inp=>setVal(inp,DATA.schedule[inp.dataset.day]));
 }
 function renderConfirmInputs(){
