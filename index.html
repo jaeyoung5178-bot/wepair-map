@@ -254,7 +254,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .ident-item{font-size:12px;color:#444;padding:3px 0;display:flex;align-items:flex-start;gap:6px}
 
 /* ── 지도 탭 ── */
-#map-section{display:flex;flex-direction:column;height:calc(100vh - 56px);padding-bottom:0}
+#map-section{display:flex;flex-direction:column;height:calc(100dvh - 60px - env(safe-area-inset-bottom,0px));padding-bottom:0;overflow:hidden;min-height:0}
 #map-section .day-tabs{
   display:flex;overflow-x:auto;background:#fff;
   border-bottom:1px solid #e5e8ee;flex-shrink:0;scrollbar-width:none;
@@ -271,12 +271,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 #dstats{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
 .dstat{font-size:11px;color:#555;background:#f0f8f8;padding:3px 8px;border-radius:10px}
 .dstat b{color:var(--teal)}
-#leafmap{flex:1;min-height:0}
-#map-ctrl{padding:7px 12px;background:#fff;border-bottom:1px solid #eef0f3;flex-shrink:0}
-#map-toggle{width:100%;font-size:12.5px;font-weight:800;padding:10px;border-radius:10px;border:1.5px solid #cfd8e0;background:#F4F7FA;color:#0C2546;cursor:pointer}
+#leafmap{flex:1 1 0;min-height:120px;background:#e9edf2}
+#map-ctrl{padding:6px 12px;background:#fff;border-bottom:1px solid #eef0f3;flex-shrink:0}
+#map-toggle{width:100%;font-size:12px;font-weight:800;padding:9px;border-radius:10px;border:1px solid #dde4ea;background:#F4F7FA;color:#15263C;cursor:pointer;transition:background .15s}
 #map-toggle:active{background:#e9eef3}
 #map-section.map-hidden #leafmap{display:none}
-#map-section.map-hidden #shop-panel{max-height:none;flex:1}
+#map-section.map-hidden #shop-panel{flex:1 1 0;min-height:0;box-shadow:none}
 #map-section.map-hidden #map-toggle{background:#2470E0;color:#fff;border-color:#2470E0}
 /* 지도 접었을 때: 목록 크게·편하게 */
 #map-section.map-hidden .si{padding:14px 16px;gap:12px}
@@ -388,11 +388,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .fb-empty .ico{font-size:42px;margin-bottom:14px}
 .fb-empty .t{font-size:15px;font-weight:700;color:#5b6b7c;margin-bottom:6px}
 .fb-empty .s{font-size:12px;line-height:1.6}
-#shop-panel{flex-shrink:0;background:#fff;border-top:1px solid #e5e8ee;display:flex;flex-direction:column;max-height:36vh}
+#shop-panel{flex:1 1 0;background:#fff;border-top:1px solid #e5e8ee;display:flex;flex-direction:column;min-height:120px;box-shadow:0 -4px 14px rgba(20,40,70,.05)}
 #shop-phdr{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;min-height:36px}
 #shop-phdr span{font-size:12px;font-weight:600;color:#555}
 #ptoggle{font-size:11px;color:var(--teal);padding:2px 9px;border:1px solid var(--teal);border-radius:10px;background:none;cursor:pointer}
-#shop-list{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;max-height:70vh;opacity:1;transition:max-height .34s cubic-bezier(.22,.61,.36,1),opacity .25s ease}
+#shop-list{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;opacity:1;transition:opacity .22s ease}
 .si{display:flex;flex-wrap:wrap;align-items:flex-start;gap:9px;padding:9px 13px;border-bottom:1px solid #f5f5f5}
 .si:active{background:#f6fafa}
 .si.on{box-shadow:inset 3px 0 0 var(--teal)}
@@ -446,6 +446,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .si-grouphdr .gh-v{margin-left:auto;font-size:10.5px;font-weight:700;color:#5b6b7c}
 .sgu.p-jy{background:#E0F5F7;color:#05707C}
 .sgu.p-cy{background:#FDEBDD;color:#B4470D}
+#shop-panel.col{flex:0 0 auto;min-height:0}
 #shop-panel.col #shop-list{max-height:0;opacity:0;flex:none;overflow:hidden}
 
 /* ── 팝업 ── */
@@ -606,7 +607,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 }
 
 /* ===== 모바일 뷰포트 보정 (상단 헤더 짤림 방지) ===== */
-#map-section{height:calc(100dvh - 56px)}
+#map-section{height:calc(100dvh - 60px - env(safe-area-inset-bottom,0px))}
 /* ===== 날짜 완료 버튼 ===== */
 .day-done-wrap{padding:13px 13px 24px;border-top:1px solid #eef0f3;background:#fff}
 .day-done-btn{width:100%;font-size:13.5px;font-weight:800;padding:14px;border-radius:13px;border:2px solid #028090;background:#028090;color:#fff;cursor:pointer}
@@ -2304,6 +2305,7 @@ function showFbWriter(){
   h+='<div class="fbw-card"><div class="fbw-h">\ud83d\udcc4 PDF \ub2e4\uc6b4\ub85c\ub4dc ('+sel+')</div>';
   h+='<div class="fbw-pdfrow"><button class="fbw-pdf plan" onclick="genPlanPDF(\''+sel+'\')">\ud83d\udccb \ud65c\ub3d9\uacc4\ud68d\uc11c (\ud574\ub2f9\uc77c)</button>'
     +'<button class="fbw-pdf rep" onclick="genReportPDF(\''+sel+'\')">\ud83d\udcca \ud544\ub4dc\ubcf4\uace0\uc11c</button></div>';
+  h+='<button class="fbw-pdf cum" onclick="genCumPDF()" style="width:100%;margin-top:9px;background:#0F6E56">📚 활동일 누적 데이터 (전 기간 종합)</button>';
   h+='<div class="fbw-hint">\ud65c\ub3d9\uacc4\ud68d\uc11c = \uadf8\ub0a0 \uc9c0\ub3c4(\ub3d9\uc120)+\uc804\uc77c \ud53c\ub4dc\ubc31 \ubc18\uc601 \u00b7 \ud544\ub4dc\ubcf4\uace0\uc11c = \uadf8\ub0a0 \ubc29\ubb38\u00b7\ub370\ubaa8 \uacb0\uacfc+\uc81c\ucd9c \ud53c\ub4dc\ubc31. \ubc84\ud2bc\uc744 \ub204\ub974\uba74 \uc778\uc1c4 \ud654\uba74\uc5d0\uc11c <b>PDF\ub85c \uc800\uc7a5</b>\uc744 \uc120\ud0dd\ud558\uc138\uc694.'+(_di===null?'<br><b>\u203b \uc774 \ub0a0\uc9dc\uc5d0 \ub9e4\uce6d\ub418\ub294 \ud544\ub4dc \uc9c0\ub3c4\uac00 \uc5c6\uc5b4 \ubcf4\uace0\uc11c\ub294 \ud53c\ub4dc\ubc31 \uc704\uc8fc\ub85c \uc0dd\uc131\ub429\ub2c8\ub2e4.</b>':'')+'</div></div>';
   var keys=Object.keys(ST.userfb||{}).sort().reverse();
   if(keys.length){
@@ -2419,12 +2421,51 @@ function genReportPDF(iso){
   inner+='<div class="sec">방문·데모 결과</div><table><tr><th class="no">No</th><th>상호</th><th>주소</th><th>담당</th><th>방문</th><th>반응</th><th>데모</th></tr>';
   R.rows.forEach(function(r,i){
     var rc=r.react==='상'?'r-sang':(r.react==='중'?'r-jung':(r.react==='하'?'r-ha':''));
-    inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(r.nm)+'</b></td><td class="ad">'+fbEsc(r.ad)+'</td><td>'+(r.person||r.gu||'')+'</td><td>'+(r.v?'O':'–')+'</td><td>'+(r.react?'<span class="pill2 '+rc+'">'+r.react+'</span>':'–')+'</td><td>'+(r.demo?'<span class="demo">데모 ✓</span>':'–')+'</td></tr>';
+    inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(r.nm)+'</b></td><td class="ad">'+fbEsc(r.ad)+'</td><td>'+(r.person?r.person:'2인1조')+'</td><td>'+(r.v?'O':'–')+'</td><td>'+(r.react?'<span class="pill2 '+rc+'">'+r.react+'</span>':'–')+'</td><td>'+(r.demo?'<span class="demo">데모 ✓</span>':'–')+'</td></tr>';
   });
   inner+='</table>';
   printDoc(dayNo+'일차 필드보고서', inner);
 }
 window.fbAttach=fbAttach; window.fbDelFile=fbDelFile; window.genPlanPDF=genPlanPDF; window.genReportPDF=genReportPDF;
+function genCumPDF(){
+  var days=[]; for(var i=0;i<DAYS.length;i++){ if(!DAYS[i].extra&&!DAYS[i].dbmiss) days.push(i); }
+  var allN={},vis={},dem={},react={};
+  days.forEach(function(i){ DAYS[i].shops.forEach(function(s){ allN[s.nm]=1; if(ST.visited[s.nm])vis[s.nm]=1; if(ST.demo[s.nm])dem[s.nm]=1; if(ST.reaction[s.nm])react[s.nm]=ST.reaction[s.nm]; }); });
+  var totalShops=Object.keys(allN).length, totVis=Object.keys(vis).length, totDem=Object.keys(dem).length;
+  var rs={'상':0,'중':0,'하':0}; Object.keys(react).forEach(function(n){ if(rs[react[n]]!==undefined)rs[react[n]]++; });
+  var pct=totVis?Math.round(totDem/totVis*100):0;
+  var fbDays=Object.keys(ST.userfb||{}).filter(function(k){return fbTextLines(ST.userfb[k]).length;}).sort();
+  function dayHasAct(i){ var d=DAYS[i]; if(ST.dayDone&&ST.dayDone[d.day])return true; return d.shops.some(function(s){return ST.visited[s.nm];}); }
+  var actDays=days.filter(dayHasAct);
+  var inner='<div class="ph"><div><h1>위페어 필드 테스트 · 활동일 누적 데이터</h1><div class="sub">전 기간 종합 — 지도·활동 리스트·데모·반응·피드백 통합 · 생성일 '+new Date().toISOString().slice(0,10)+'</div></div><div class="pill">CUMULATIVE</div></div>';
+  inner+='<div class="kpis"><div class="kpi"><div class="big">'+actDays.length+'</div><div class="lab">활동일</div></div>'
+    +'<div class="kpi"><div class="big">'+totVis+'/'+totalShops+'</div><div class="lab">누적 방문(고유)</div></div>'
+    +'<div class="kpi"><div class="big">'+totDem+'</div><div class="lab">누적 데모</div></div>'
+    +'<div class="kpi"><div class="big">'+pct+'%</div><div class="lab">방문 대비 데모</div></div>'
+    +'<div class="kpi"><div class="big">'+rs['상']+'·'+rs['중']+'·'+rs['하']+'</div><div class="lab">반응 상·중·하</div></div></div>';
+  inner+='<div class="sec">일자별 활동 요약</div><table><tr><th class="no">일차</th><th>지역</th><th>방문</th><th>데모</th><th>전환</th><th>반응(상/중/하)</th><th>피드백</th></tr>';
+  days.forEach(function(i){ var d=DAYS[i]; var R=fbDayResults(i); var drs={'상':0,'중':0,'하':0}; d.shops.forEach(function(s){var r=ST.reaction[s.nm]; if(drs[r]!==undefined)drs[r]++;}); var iso=dayIso(i); var hasFb=iso&&ST.userfb&&ST.userfb[iso]&&fbTextLines(ST.userfb[iso]).length;
+    inner+='<tr><td class="no">'+d.day+'</td><td>'+fbEsc(d.title)+'</td><td>'+R.vis+'/'+R.total+'</td><td>'+R.dem+'</td><td>'+R.pct+'%</td><td>'+drs['상']+'/'+drs['중']+'/'+drs['하']+'</td><td>'+(hasFb?'O':'–')+'</td></tr>'; });
+  inner+='</table>';
+  var demoList=[]; days.forEach(function(i){ DAYS[i].shops.forEach(function(s){ if(ST.demo[s.nm]&&!demoList.some(function(x){return x.nm===s.nm;})) demoList.push({nm:s.nm,day:DAYS[i].day,gu:s.gu,person:s.person||'',react:ST.reaction[s.nm]||''}); }); });
+  inner+='<div class="sec">데모 완료 업체 ('+demoList.length+')</div>';
+  if(demoList.length){ inner+='<table><tr><th class="no">No</th><th>상호</th><th>담당</th><th>일차</th><th>지역</th><th>반응</th></tr>'; demoList.forEach(function(x,i){ var rc=x.react==='상'?'r-sang':(x.react==='중'?'r-jung':(x.react==='하'?'r-ha':'')); inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(x.nm)+'</b></td><td>'+(x.person?('<span class="pill2" style="background:'+(x.person==='재영'?'#028090':'#E8590C')+'">'+x.person+'</span>'):'<span style="color:#8A94A0">2인1조</span>')+'</td><td>'+x.day+'일차</td><td class="ad">'+fbEsc(x.gu||'')+'</td><td>'+(x.react?'<span class="pill2 '+rc+'">'+x.react+'</span>':'–')+'</td></tr>'; }); inner+='</table>'; }
+  else inner+='<div class="box">아직 데모 완료 업체가 없습니다.</div>';
+  var rev=[]; days.forEach(function(i){ DAYS[i].shops.forEach(function(s){ if(ST.revisit[s.nm]&&!rev.some(function(x){return x.nm===s.nm;})) rev.push({nm:s.nm,day:DAYS[i].day,gu:s.gu}); }); });
+  if(rev.length){ inner+='<div class="sec">재방문 약속 ('+rev.length+')</div><div class="box"><ul>'; rev.forEach(function(x){ inner+='<li><b>'+fbEsc(x.nm)+'</b> · '+x.day+'일차 · '+fbEsc(x.gu||'')+'</li>'; }); inner+='</ul></div>'; }
+  inner+='<div class="sec">일자별 활동 리스트 (방문·데모·반응)</div>';
+  if(!actDays.length) inner+='<div class="box">아직 완료 처리된 활동일이 없습니다 — 날짜 탭에서 "필드 테스트 완료"를 누르거나 방문을 기록하면 누적됩니다.</div>';
+  actDays.forEach(function(i){ var d=DAYS[i]; var R=fbDayResults(i);
+    inner+='<div style="margin-top:11px;font-weight:800;color:#15263C;font-size:12px">'+d.day+'일차 · '+fbEsc(d.title)+' — 방문 '+R.vis+'/'+R.total+' · 데모 '+R.dem+'</div>';
+    inner+='<table><tr><th class="no">No</th><th>상호</th><th>주소</th><th>담당</th><th>방문</th><th>반응</th><th>데모</th></tr>';
+    R.rows.forEach(function(r,k){ var rc=r.react==='상'?'r-sang':(r.react==='중'?'r-jung':(r.react==='하'?'r-ha':'')); inner+='<tr><td class="no">'+(k+1)+'</td><td>'+fbEsc(r.nm)+'</td><td class="ad">'+fbEsc(r.ad)+'</td><td>'+(r.person?r.person:'2인1조')+'</td><td>'+(r.v?'O':'–')+'</td><td>'+(r.react?'<span class="pill2 '+rc+'">'+r.react+'</span>':'–')+'</td><td>'+(r.demo?'<span class="demo">데모 ✓</span>':'–')+'</td></tr>'; });
+    inner+='</table>'; });
+  inner+='<div class="sec">전체 제출 피드백 (날짜별 통합)</div>';
+  if(fbDays.length){ fbDays.forEach(function(k){ inner+='<div style="margin-top:8px;font-weight:800;color:#05707C;font-size:12px">'+k+'</div><div class="box">'+mergeFb(ST.userfb[k])+'</div>'; }); }
+  else inner+='<div class="box">제출된 피드백이 없습니다.</div>';
+  printDoc('활동일 누적 데이터', inner);
+}
+window.genCumPDF=genCumPDF;
 
 function drawMap(d){
   if(smark) leafmap.removeLayer(smark);
@@ -2608,6 +2649,7 @@ function togglePanel(){
   pOpen=!pOpen;
   document.getElementById('shop-panel').classList.toggle('col',!pOpen);
   document.getElementById('ptoggle').textContent=pOpen?'접기 ▼':'펼치기 ▲';
+  if(leafmap) setTimeout(function(){leafmap.invalidateSize();},240);
 }
 let mapHidden=false;
 try{ mapHidden=localStorage.getItem('wepair_maphidden')==='1'; }catch(e){}
@@ -2616,6 +2658,7 @@ function applyMapHidden(){
   sec.classList.toggle('map-hidden',mapHidden);
   const b=document.getElementById('map-toggle');
   if(b) b.textContent=mapHidden?'🗺️ 지도 다시 보기':'🗺️ 지도 접기 · 목록 크게 보기';
+  if(leafmap) setTimeout(function(){leafmap.invalidateSize();},60);
   if(!mapHidden && leafmap){ pOpen=true; document.getElementById('shop-panel').classList.remove('col'); document.getElementById('ptoggle').textContent='접기 ▼'; setTimeout(function(){leafmap.invalidateSize();},80); }
 }
 function toggleMap(){
