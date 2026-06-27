@@ -1438,7 +1438,13 @@ const REVISIT_SEED=[
 ];
 // 데모완료 시드 (1일차 4 + 2일차 2) · 글로벌은 DB 외 신규개발
 const SEED_DEMO=["현대자동차공업사","EU모터스","㈜삼삼오","부평스카이","에이원모터스","글로벌자동차공업사","드림자동차서비스","형제자동차공업사","(주)1급이글자동차","부천현대자동차공업사","위너모터스","불루모터스정비","아셀 1급자동차공업사"];
-const DEMO_EXTRA={"글로벌자동차공업사":{gu:"부천시",day:2,note:"2일차 현장 신규개발"},"위너모터스":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)"},"불루모터스정비":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)"},"아셀 1급자동차공업사":{gu:"부천시",day:3,note:"3일차 현장 신규개발(채영)"}};
+const DEMO_EXTRA={"글로벌자동차공업사":{gu:"부천시",day:2,note:"2일차 현장 신규개발",la:37.4993,ln:126.7894,approx:true},"위너모터스":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)",la:37.5272,ln:126.7682,approx:true},"불루모터스정비":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)",la:37.5262,ln:126.7702,approx:true},"아셀 1급자동차공업사":{gu:"부천시",day:3,note:"3일차 현장 신규개발(채영)",la:37.5220,ln:126.7720,approx:true},"대주모터스":{gu:"서구",day:4,note:"4일차 현장 신규개발(재영)",la:37.4910,ln:126.6712,approx:true},"국제자동차공업사":{gu:"미추홀구",day:7,note:"7일차 현장 신규개발(재영) · 주안동 229-4",la:37.46314247,ln:126.6791174,approx:false},"주안현대":{gu:"미추홀구",day:7,note:"7일차 현장 신규개발(채영)",la:37.4631,ln:126.6800,approx:true}};
+// 명함 수령 상세정보 시드(재영 6·7일차) — ST.info 미설정 시에만 적용
+const SEED_INFO={
+  '국제자동차공업사':{who:'대표 이강현',ph:'010-7727-6161',ad:'인천 미추홀구 미추홀대로733번길 20 (주안동) · T 032-872-7427 · F 032-873-7427 · 전차종수리/견적/경정비/판금/도장/보험수리/엔진오일'},
+  '메르시자동차':{who:'대표 강태영(KANG TAE YOUNG)',ph:'010-2666-1748',ad:'인천 서구 원석로 137 · T 032-572-9035 · F 032-572-9036 · E sablels@naver.com · 수입차(BMW·벤츠·아우디·렉서스 등) 전문'},
+  '성진모터스':{who:'대표 김관우',ph:'010-8313-5229',ad:'인천 서구 건지로 25 (석남동) A동 103호 · T 032-573-2142 · F 032-573-2143 · 보조 010-6771-1785 · 24시 렉카대기 · 국내차/수입차 전문공업사'}
+};
 // 3일차 데모완료 7건(아셀 등 현장 신규 포함) 보정 — 시드 버전 3
 const DAY3_DEMOS=['드림자동차서비스','형제자동차공업사','(주)1급이글자동차','부천현대자동차공업사','위너모터스','불루모터스정비','아셀 1급자동차공업사'];
 const DAY3_NEWDEV=[{nm:'위너모터스',gu:'부천시'},{nm:'불루모터스정비',gu:'부천시'},{nm:'아셀 1급자동차공업사',gu:'부천시'}];
@@ -1446,6 +1452,45 @@ function ensureDay3Demos(){
   ST.demo=ST.demo||{}; ST.newdev=ST.newdev||[];
   DAY3_DEMOS.forEach(function(n){ if(ST.demo[n]===undefined) ST.demo[n]=true; });
   DAY3_NEWDEV.forEach(function(o){ if(!ST.newdev.some(function(x){return x.nm===o.nm;})) ST.newdev.push({nm:o.nm,gu:o.gu}); });
+}
+// ── 데모완료 통합 원장(单一 소스): 위페어 원본 기록 대조 결과 28건(재영15·채영13) · 날짜+담당 귀속 ──
+// 같은 상호 오류중복(에이원 jdh913399·아셀 asd1234) 제외 / eu모터스=채영(6/16) 정상귀속 / zerocloset(6/12)은 비필드로 제외
+const DEMO_LOG=[
+  {nm:'㈜삼삼오',fday:1,date:'6/16',person:'재영',gu:'계양구'},
+  {nm:'현대자동차공업사',fday:1,date:'6/16',person:'재영',gu:'부평구'},
+  {nm:'부평스카이',fday:1,date:'6/16',person:'채영',gu:'계양구'},
+  {nm:'EU모터스',fday:1,date:'6/16',person:'채영',gu:'부평구'},
+  {nm:'글로벌자동차공업사',fday:2,date:'6/17',person:'재영',gu:'부천시'},
+  {nm:'에이원모터스',fday:2,date:'6/17',person:'채영',gu:'부천시'},
+  {nm:'드림자동차서비스',fday:3,date:'6/18',person:'재영',gu:'부천시'},
+  {nm:'형제자동차공업사',fday:3,date:'6/18',person:'재영',gu:'부천시'},
+  {nm:'위너모터스',fday:3,date:'6/18',person:'재영',gu:'부천시'},
+  {nm:'불루모터스정비',fday:3,date:'6/18',person:'재영',gu:'부천시'},
+  {nm:'부천현대자동차공업사',fday:3,date:'6/18',person:'채영',gu:'부천시'},
+  {nm:'(주)1급이글자동차',fday:3,date:'6/18',person:'채영',gu:'부천시'},
+  {nm:'아셀 1급자동차공업사',fday:3,date:'6/18',person:'채영',gu:'부천시'},
+  {nm:'대주모터스',fday:4,date:'6/19',person:'재영',gu:'서구'},
+  {nm:'현대모터스',fday:4,date:'6/19',person:'재영',gu:'서구'},
+  {nm:'아트샵모터스(주)',fday:4,date:'6/19',person:'채영',gu:'서구'},
+  {nm:'조은모터스',fday:4,date:'6/19',person:'채영',gu:'서구'},
+  {nm:'광일자동차정비공업사',fday:5,date:'6/23',person:'재영',gu:'서구'},
+  {nm:'(주)이레모터스',fday:5,date:'6/23',person:'재영',gu:'서구'},
+  {nm:'서부공단모터스',fday:5,date:'6/23',person:'채영',gu:'서구'},
+  {nm:'붕붕모터스',fday:5,date:'6/23',person:'채영',gu:'서구'},
+  {nm:'메르시자동차',fday:6,date:'6/24',person:'재영',gu:'서구'},
+  {nm:'성진모터스',fday:6,date:'6/24',person:'재영',gu:'서구'},
+  {nm:'로드모터스',fday:6,date:'6/24',person:'채영',gu:'서구'},
+  {nm:'신흥현대자동차공업사',fday:7,date:'6/25',person:'재영',gu:'중구'},
+  {nm:'국제자동차공업사',fday:7,date:'6/25',person:'재영',gu:'미추홀구'},
+  {nm:'(주)제일자동차공업사',fday:7,date:'6/25',person:'채영',gu:'미추홀구'},
+  {nm:'주안현대',fday:7,date:'6/25',person:'채영',gu:'미추홀구'}
+];
+const DEMO_META={}; DEMO_LOG.forEach(function(e){ DEMO_META[e.nm]={fday:e.fday,date:e.date,person:e.person,gu:e.gu}; });
+function demoMetaOf(nm){ return DEMO_META[nm]||null; }
+function ensureDemoLog(){
+  ST.demo=ST.demo||{}; ST.newdev=ST.newdev||[]; ST.info=ST.info||{};
+  DEMO_LOG.forEach(function(e){ if(ST.demo[e.nm]!==true) ST.demo[e.nm]=true; });
+  Object.keys(SEED_INFO).forEach(function(nm){ if(!ST.info[nm]||(!ST.info[nm].who&&!ST.info[nm].ph&&!ST.info[nm].ad)) ST.info[nm]=SEED_INFO[nm]; });
 }
 function loadST(){
   try{ const r=localStorage.getItem(LS_KEY); if(r) ST=JSON.parse(r); }catch(e){}
@@ -1459,6 +1504,7 @@ function loadST(){
     ST._seeded=true; saveST();
   }
   if((ST._seedVer||0) < 3){ ensureDay3Demos(); ST._seedVer=3; saveST(); }
+  if((ST._seedVer||0) < 5){ ensureDemoLog(); ST._seedVer=5; saveST(); }
 }
 function saveST(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(ST)); }catch(e){} }
 
@@ -1642,7 +1688,7 @@ function stToRemote(){
     newdev: (ST.newdev||[]).map(function(o){return {n:o.nm,g:o.gu||''};}),
     dayDone: ST.dayDone||{},
     userfb: fbStripFiles(ST.userfb),
-    sales: ST.sales||0, seeded: true, seedVer:3, _t: Date.now()
+    sales: ST.sales||0, seeded: true, seedVer:5, _t: Date.now()
   };
 }
 function remoteToST(v){
@@ -1761,6 +1807,7 @@ function initSync(){
       }
       remoteToST(v);
       if((v.seedVer||0) < 3){ ensureDay3Demos(); applyingRemote=true; fbRef.set(stToRemote()); applyingRemote=false; }
+      if((v.seedVer||0) < 5){ ensureDemoLog(); ST._seedVer=5; applyingRemote=true; fbRef.set(stToRemote()); applyingRemote=false; }
       saveST(); rerenderCurrent(); try{ renderHomeKPI(); renderDemoHome(); }catch(e){}
       setSyncBadge(true);
     }, function(err){ console.warn('sync error',err); setSyncBadge(false); });
@@ -1929,9 +1976,10 @@ function demoEntries(){
     var inf=shopInfo(nm,found);
     if(found) arr.push({nm:nm,gu:found.gu,day:day,la:found.la,ln:found.ln,who:inf.who,ph:inf.ph,ad:inf.ad,isNew:false});
     else if(ndMap[nm]) arr.push({nm:nm,gu:ndMap[nm].gu||'',day:null,la:null,ln:null,note:'현장 신규개발',isNew:true,who:inf.who,ph:inf.ph,ad:inf.ad});
-    else { var ex=DEMO_EXTRA[nm]||{}; arr.push({nm:nm,gu:ex.gu||'',day:ex.day||'',la:null,ln:null,note:ex.note||'지도 좌표 없음',who:inf.who,ph:inf.ph,ad:inf.ad,isNew:false}); }
+    else { var ex=DEMO_EXTRA[nm]||{}; arr.push({nm:nm,gu:ex.gu||'',day:ex.day||'',la:ex.la||null,ln:ex.ln||null,approx:!!ex.approx,note:ex.note||'지도 좌표 없음',who:inf.who,ph:inf.ph,ad:inf.ad,isNew:false}); }
   });
-  arr.sort(function(a,b){ return (a.isNew?1:0)-(b.isNew?1:0); });
+  arr.forEach(function(e){ var m=demoMetaOf(e.nm); if(m){ e.person=m.person; e.date=m.date; e.fday=m.fday; if(!e.gu) e.gu=m.gu; } });
+  arr.sort(function(a,b){ var fa=a.fday||99,fb=b.fday||99; if(fa!==fb) return fa-fb; var pa=a.person==='재영'?0:(a.person==='채영'?1:2),pb=b.person==='재영'?0:(b.person==='채영'?1:2); return pa-pb; });
   return arr;
 }
 function renderDemoHome(){
@@ -1944,10 +1992,13 @@ function renderDemoHome(){
     var ph=e.ph?('<span class="dh-ph2">'+e.ph+'</span>'):'';
     var who=e.who?(' · '+e.who):'';
     var badge=e.isNew?'<span class="nd-badge">🆕</span> ':'';
+    var pcol=e.person==='재영'?'#028090':(e.person==='채영'?'#E8590C':'');
+    var pbadge=e.person?('<span style="display:inline-block;background:'+pcol+';color:#fff;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;margin-left:6px;vertical-align:1px">'+e.person+'</span>'):'';
+    var dayTxt=(e.fday?e.fday+'일차':(e.day?e.day+'일차':''))+(e.date?'('+e.date+')':'');
     var nmEsc=e.nm.replace(/'/g,"\\'");
     items+='<div class="dh-item dh-cmp'+(e.isNew?' dh-new':'')+'"><div class="dh-no">'+(i+1)+'</div>'
-      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+badge+e.nm+'</div>'
-      +'<div class="dh-meta">'+(e.day?e.day+'일차 · ':'')+(e.gu||'')+(e.note?' · '+e.note:'')+who+ph+'</div></div>'
+      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+badge+e.nm+pbadge+'</div>'
+      +'<div class="dh-meta">'+(dayTxt?dayTxt+' · ':'')+(e.gu||'')+(e.note?' · '+e.note:'')+(e.approx?' · 📍추정좌표':'')+who+ph+'</div></div>'
       +'<button class="dh-edit" onclick="openInfoEditor(\''+nmEsc+'\')">✏️</button></div>';
   }); items='<div class="dh-scroll">'+items+'</div>'+(n>7?'<div class="dh-scrollnote">↕ 카드 안에서 스크롤 ('+n+'곳)</div>':''); }
   el.innerHTML=
@@ -1972,7 +2023,7 @@ function showDemoView(){
   document.getElementById('shop-panel').style.display='';
   document.getElementById('person-filter').style.display='none';
   var mapped=demoEntries().filter(function(e){return e.la&&e.ln;});
-  var arr=mapped.map(function(e,i){ return {n:i+1,nm:e.nm,ad:(e.day?e.day+'일차 · ':'')+(e.gu||''),ph:'',la:e.la,ln:e.ln,gu:e.gu}; });
+  var arr=mapped.map(function(e,i){ return {n:i+1,nm:e.nm,ad:(e.fday?e.fday+'일차 ':'')+(e.date?'('+e.date+') ':'')+(e.person?'['+e.person+'] ':'')+(e.gu||'')+(e.approx?' ※추정좌표':''),ph:'',la:e.la,ln:e.ln,gu:e.gu}; });
   var d={title:'데모완료 업체',shops:arr,slat:(arr[0]?arr[0].la:37.49),slng:(arr[0]?arr[0].ln:126.72),km:0,_nostart:true,_demo:true};
   document.getElementById('dtitle').textContent='✅ 데모완료 업체 (세일즈)';
   document.getElementById('dsub').textContent=demoCount()+'곳 데모완료 · 지도엔 좌표 있는 '+arr.length+'곳 표시';
@@ -2553,9 +2604,9 @@ function genCumPDF(){
   days.forEach(function(i){ var d=DAYS[i]; var R=fbDayResults(i); var drs={'상':0,'중':0,'하':0}; d.shops.forEach(function(s){var r=ST.reaction[s.nm]; if(drs[r]!==undefined)drs[r]++;}); var iso=dayIso(i); var hasFb=iso&&ST.userfb&&ST.userfb[iso]&&fbTextLines(ST.userfb[iso]).length;
     inner+='<tr><td class="no">'+d.day+'</td><td>'+fbEsc(d.title)+'</td><td>'+R.vis+'/'+R.total+'</td><td>'+R.dem+'</td><td>'+R.pct+'%</td><td>'+drs['상']+'/'+drs['중']+'/'+drs['하']+'</td><td>'+(hasFb?'O':'–')+'</td></tr>'; });
   inner+='</table>';
-  var demoList=[]; days.forEach(function(i){ DAYS[i].shops.forEach(function(s){ if(ST.demo[s.nm]&&!demoList.some(function(x){return x.nm===s.nm;})) demoList.push({nm:s.nm,day:DAYS[i].day,gu:s.gu,person:s.person||'',react:ST.reaction[s.nm]||''}); }); });
+  var demoList=demoEntries().map(function(e){ return {nm:e.nm,fday:e.fday||e.day||'',date:e.date||'',gu:e.gu||'',person:e.person||'',react:ST.reaction[e.nm]||''}; });
   inner+='<div class="sec">데모 완료 업체 ('+demoList.length+')</div>';
-  if(demoList.length){ inner+='<table><tr><th class="no">No</th><th>상호</th><th>담당</th><th>일차</th><th>지역</th><th>반응</th></tr>'; demoList.forEach(function(x,i){ var rc=x.react==='상'?'r-sang':(x.react==='중'?'r-jung':(x.react==='하'?'r-ha':'')); inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(x.nm)+'</b></td><td>'+(x.person?('<span class="pill2" style="background:'+(x.person==='재영'?'#028090':'#E8590C')+'">'+x.person+'</span>'):'<span style="color:#8A94A0">2인1조</span>')+'</td><td>'+x.day+'일차</td><td class="ad">'+fbEsc(x.gu||'')+'</td><td>'+(x.react?'<span class="pill2 '+rc+'">'+x.react+'</span>':'–')+'</td></tr>'; }); inner+='</table>'; }
+  if(demoList.length){ inner+='<table><tr><th class="no">No</th><th>상호</th><th>담당</th><th>일차</th><th>날짜</th><th>지역</th><th>반응</th></tr>'; demoList.forEach(function(x,i){ var rc=x.react==='상'?'r-sang':(x.react==='중'?'r-jung':(x.react==='하'?'r-ha':'')); inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(x.nm)+'</b></td><td>'+(x.person?('<span class="pill2" style="background:'+(x.person==='재영'?'#028090':'#E8590C')+'">'+x.person+'</span>'):'<span style="color:#8A94A0">2인1조</span>')+'</td><td>'+(x.fday?x.fday+'일차':'–')+'</td><td class="ad">'+fbEsc(x.date||'')+'</td><td class="ad">'+fbEsc(x.gu||'')+'</td><td>'+(x.react?'<span class="pill2 '+rc+'">'+x.react+'</span>':'–')+'</td></tr>'; }); inner+='</table>'; }
   else inner+='<div class="box">아직 데모 완료 업체가 없습니다.</div>';
   var rev=[]; days.forEach(function(i){ DAYS[i].shops.forEach(function(s){ if(ST.revisit[s.nm]&&!rev.some(function(x){return x.nm===s.nm;})) rev.push({nm:s.nm,day:DAYS[i].day,gu:s.gu}); }); });
   if(rev.length){ inner+='<div class="sec">재방문 약속 ('+rev.length+')</div><div class="box"><ul>'; rev.forEach(function(x){ inner+='<li><b>'+fbEsc(x.nm)+'</b> · '+x.day+'일차 · '+fbEsc(x.gu||'')+'</li>'; }); inner+='</ul></div>'; }
