@@ -1438,13 +1438,26 @@ const REVISIT_SEED=[
 ];
 // 데모완료 시드 (1일차 4 + 2일차 2) · 글로벌은 DB 외 신규개발
 const SEED_DEMO=["현대자동차공업사","EU모터스","㈜삼삼오","부평스카이","에이원모터스","글로벌자동차공업사","드림자동차서비스","형제자동차공업사","(주)1급이글자동차","부천현대자동차공업사","위너모터스","불루모터스정비","아셀 1급자동차공업사"];
-const DEMO_EXTRA={"글로벌자동차공업사":{gu:"부천시",day:2,note:"2일차 현장 신규개발",la:37.4993,ln:126.7894,approx:true},"위너모터스":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)",la:37.5272,ln:126.7682,approx:true},"불루모터스정비":{gu:"부천시",day:3,note:"3일차 현장 신규개발(재영)",la:37.5262,ln:126.7702,approx:true},"아셀 1급자동차공업사":{gu:"부천시",day:3,note:"3일차 현장 신규개발(채영)",la:37.5220,ln:126.7720,approx:true},"대주모터스":{gu:"서구",day:4,note:"4일차 현장 신규개발(재영)",la:37.4910,ln:126.6712,approx:true},"국제자동차공업사":{gu:"미추홀구",day:7,note:"7일차 현장 신규개발(재영) · 주안동 229-4",la:37.46314247,ln:126.6791174,approx:false},"주안현대":{gu:"미추홀구",day:7,note:"7일차 현장 신규개발(채영)",la:37.4631,ln:126.6800,approx:true}};
+const DEMO_EXTRA={"글로벌자동차공업사":{gu:"부천시",day:2,note:"2일차 · DB등록(글로벌모터스·원미동)",la:37.5001691,ln:126.7902925,approx:false},"위너모터스":{gu:"부천시",day:3,note:"3일차 · DB등록(도당동)",la:37.5098473,ln:126.7805215,approx:false},"불루모터스정비":{gu:"부천시",day:3,note:"3일차 · DB등록(1급불루모터스정비·삼정동)",la:37.5293996,ln:126.7614339,approx:false},"아셀 1급자동차공업사":{gu:"부천시",day:3,note:"3일차 현장 신규발굴(채영) · DB 미등록",la:37.5220,ln:126.7720,approx:true},"대주모터스":{gu:"서구",day:4,note:"4일차 · DB등록(백범로845-1·가좌동)",la:37.4839172,ln:126.6639348,approx:false},"국제자동차공업사":{gu:"미추홀구",day:7,note:"7일차 · DB등록(주안동229-4)",la:37.46314247,ln:126.6791174,approx:false},"주안현대":{gu:"미추홀구",day:7,note:"7일차 · DB등록(주안현대서비스(주)·경원대로922)",la:37.4649513,ln:126.6908323,approx:false}};
 // 명함 수령 상세정보 시드(재영 6·7일차) — ST.info 미설정 시에만 적용
 const SEED_INFO={
   '국제자동차공업사':{who:'대표 이강현',ph:'010-7727-6161',ad:'인천 미추홀구 미추홀대로733번길 20 (주안동) · T 032-872-7427 · F 032-873-7427 · 전차종수리/견적/경정비/판금/도장/보험수리/엔진오일'},
   '메르시자동차':{who:'대표 강태영(KANG TAE YOUNG)',ph:'010-2666-1748',ad:'인천 서구 원석로 137 · T 032-572-9035 · F 032-572-9036 · E sablels@naver.com · 수입차(BMW·벤츠·아우디·렉서스 등) 전문'},
   '성진모터스':{who:'대표 김관우',ph:'010-8313-5229',ad:'인천 서구 건지로 25 (석남동) A동 103호 · T 032-573-2142 · F 032-573-2143 · 보조 010-6771-1785 · 24시 렉카대기 · 국내차/수입차 전문공업사'}
 };
+// ── 현장 신규발굴 후보(전체 7곳) : DB(1~10일차 제공명단)에 없던 것으로 보고 신규발굴 체크한 데모 ──
+const FIELD_NEW=['위너모터스','불루모터스정비','아셀 1급자동차공업사','글로벌자동차공업사','대주모터스','국제자동차공업사','주안현대'];
+// ── 검수 결과: 제공받은 DB 엑셀에 실제로 존재 → 현장발굴 착각 (값 = DB 출처 표기) ──
+// ※ +α 후보(67곳)는 내가 추가한 것이므로 DB 아님 → 제외 / DB 엑셀 확인 후 아래에 채움
+const DB_MISTAKEN={
+  '글로벌자동차공업사':'DB등록 · 글로벌모터스 (부천 원미구 조마루로411번길61, 원미동)',
+  '위너모터스':'DB등록 · 위너모터스 (부천 원미구 옥산로184, 도당동)',
+  '불루모터스정비':'DB등록 · 1급불루모터스정비 (부천 오정구 송내대로518번길30, 삼정동)',
+  '대주모터스':'DB등록 · 대주모터스 (서구 백범로 845-1, 가좌동)',
+  '국제자동차공업사':'DB등록 · 국제자동차공업사 (미추홀 미추홀대로733번길20, 주안동)',
+  '주안현대':'DB등록 · 주안현대서비스(주) (미추홀 경원대로922, 주안동)'
+};
+function isDbMistaken(nm){ return Object.prototype.hasOwnProperty.call(DB_MISTAKEN,nm); }
 // 3일차 데모완료 7건(아셀 등 현장 신규 포함) 보정 — 시드 버전 3
 const DAY3_DEMOS=['드림자동차서비스','형제자동차공업사','(주)1급이글자동차','부천현대자동차공업사','위너모터스','불루모터스정비','아셀 1급자동차공업사'];
 const DAY3_NEWDEV=[{nm:'위너모터스',gu:'부천시'},{nm:'불루모터스정비',gu:'부천시'},{nm:'아셀 1급자동차공업사',gu:'부천시'}];
@@ -1487,9 +1500,26 @@ const DEMO_LOG=[
 ];
 const DEMO_META={}; DEMO_LOG.forEach(function(e){ DEMO_META[e.nm]={fday:e.fday,date:e.date,person:e.person,gu:e.gu}; });
 function demoMetaOf(nm){ return DEMO_META[nm]||null; }
+// 활동일자별 데모 집계 (재영/채영) — 위페어 원본 28건 기준
+const DEMO_DAY_DATE={1:'6/16',2:'6/17',3:'6/18',4:'6/19',5:'6/23',6:'6/24',7:'6/25'};
+function demoByDay(){
+  var agg={}; for(var i=1;i<=7;i++) agg[i]={fday:i,date:DEMO_DAY_DATE[i],재영:0,채영:0,total:0};
+  DEMO_LOG.forEach(function(e){ if(agg[e.fday]){ agg[e.fday][e.person]=(agg[e.fday][e.person]||0)+1; agg[e.fday].total++; } });
+  return agg;
+}
 function ensureDemoLog(){
   ST.demo=ST.demo||{}; ST.newdev=ST.newdev||[]; ST.info=ST.info||{};
-  DEMO_LOG.forEach(function(e){ if(ST.demo[e.nm]!==true) ST.demo[e.nm]=true; });
+  var allow={}; DEMO_LOG.forEach(function(e){ allow[e.nm]=true; });
+  // 위페어 원본 28건 기준으로 정리 — 표준에 없는 잔여/중복 데모 제거(검수)
+  var removed=[];
+  Object.keys(ST.demo).forEach(function(k){ if(ST.demo[k] && !allow[k]){ delete ST.demo[k]; removed.push(k); } });
+  // 원본 28건은 모두 데모완료로 보장
+  DEMO_LOG.forEach(function(e){ ST.demo[e.nm]=true; });
+  // 현장 신규발굴 7곳 모두 신규개발 명단에 모음(착각 검수용)
+  FIELD_NEW.forEach(function(nm){ if(!ST.newdev.some(function(x){return x.nm===nm;})) ST.newdev.push({nm:nm,gu:(DEMO_EXTRA[nm]||{}).gu||''}); });
+  // 정리내역 1회 기록(사용자 확인용)
+  if(removed.length){ ST._demoCleaned=(ST._demoCleaned||[]).concat(removed); }
+  // 명함 상세정보 시드(빈 경우에만)
   Object.keys(SEED_INFO).forEach(function(nm){ if(!ST.info[nm]||(!ST.info[nm].who&&!ST.info[nm].ph&&!ST.info[nm].ad)) ST.info[nm]=SEED_INFO[nm]; });
 }
 function loadST(){
@@ -1504,7 +1534,7 @@ function loadST(){
     ST._seeded=true; saveST();
   }
   if((ST._seedVer||0) < 3){ ensureDay3Demos(); ST._seedVer=3; saveST(); }
-  if((ST._seedVer||0) < 5){ ensureDemoLog(); ST._seedVer=5; saveST(); }
+  if((ST._seedVer||0) < 7){ ensureDemoLog(); ST._seedVer=7; saveST(); }
 }
 function saveST(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(ST)); }catch(e){} }
 
@@ -1629,25 +1659,37 @@ function removeNewDev(nm){
 }
 function renderNewDevHome(){
   var el=document.getElementById('newdev-home'); if(!el) return;
-  var list=ST.newdev||[]; var n=list.length;
-  var demoN=list.filter(function(o){return ST.demo[o.nm];}).length;
-  var items='';
-  if(!n){ items='<div class="dh-empty">아직 현장 신규개발 건이 없습니다. <b>➕ 신규개발 추가</b>로 목록에 없던 업체를 기록하세요. 데모까지 했으면 각 건에서 <b>데모완료</b>를 체크하면 됩니다.</div>'; }
-  else { list.forEach(function(o,i){
+  var all=ST.newdev||[];
+  var genuine=all.filter(function(o){return !isDbMistaken(o.nm);});
+  var mistaken=all.filter(function(o){return isDbMistaken(o.nm);});
+  var n=genuine.length;
+  var demoN=genuine.filter(function(o){return ST.demo[o.nm];}).length;
+  function rowOf(o,i,mis){
     var nm=o.nm; var inf=shopInfo(nm,null); var isDemo=!!ST.demo[nm]; var nmEsc=nm.replace(/'/g,"\\'");
     var contact=(inf.who||inf.ph)?('<div class="dh-contact">'+(inf.who?'<b>'+inf.who+'</b>':'')+(inf.who&&inf.ph?' · ':'')+(inf.ph||'')+'</div>'):'';
     var addr=inf.ad?('<div class="dh-addr">'+inf.ad+'</div>'):'';
-    items+='<div class="dh-item dh-new"><div class="dh-no">'+(i+1)+'</div>'
-      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+nm+(isDemo?' <span class="demo-badge">✅ 데모</span>':'')+'</div>'
-      +'<div class="dh-meta">현장 신규개발'+(o.gu?' · '+o.gu:'')+'</div>'+contact+addr+'</div>'
+    var star=mis?'<span style="color:#C0392B;font-weight:900">*</span> ':'';
+    var meta=mis?('<span style="color:#C0392B;font-weight:700">현장발굴 착각</span> · DB 등록업체 '+(DB_MISTAKEN[nm]?'· '+DB_MISTAKEN[nm]:'')):('현장 신규개발'+(o.gu?' · '+o.gu:''));
+    return '<div class="dh-item dh-new"'+(mis?' style="background:#FDECEA;border-color:#F5C6C0"':'')+'><div class="dh-no">'+(i+1)+'</div>'
+      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+star+nm+(isDemo?' <span class="demo-badge">✅ 데모</span>':'')+'</div>'
+      +'<div class="dh-meta">'+meta+'</div>'+contact+addr+'</div>'
       +'<div class="dh-itemctrl">'
       +'<button class="ndchk'+(isDemo?' on':'')+'" onclick="toggleNewDevDemo(\''+nmEsc+'\')">'+(isDemo?'✅ 데모완료':'데모완료 체크')+'</button>'
       +'<button class="dh-edit" onclick="openInfoEditor(\''+nmEsc+'\')">✏️ 정보</button>'
       +'<button class="dh-del" onclick="removeNewDev(\''+nmEsc+'\')">✕</button></div></div>';
-  }); items='<div class="dh-scroll">'+items+'</div>'+(n>5?'<div class="dh-scrollnote">↕ 카드 안에서 스크롤 ('+n+'곳)</div>':''); }
+  }
+  var items='';
+  if(!n && !mistaken.length){ items='<div class="dh-empty">아직 현장 신규개발 건이 없습니다. <b>➕ 신규개발 추가</b>로 목록에 없던 업체를 기록하세요. 데모까지 했으면 각 건에서 <b>데모완료</b>를 체크하면 됩니다.</div>'; }
+  else {
+    var g=''; genuine.forEach(function(o,i){ g+=rowOf(o,i,false); });
+    var m='';
+    if(mistaken.length){ m='<div style="margin:10px 6px 4px;font-size:12px;color:#C0392B;font-weight:800">⚠ DB에 원래 있던 곳 — 현장발굴 착각 ('+mistaken.length+'곳)</div>';
+      mistaken.forEach(function(o,i){ m+=rowOf(o,i,true); }); }
+    items='<div class="dh-scroll">'+g+m+'</div>'+((n+mistaken.length)>5?'<div class="dh-scrollnote">↕ 카드 안에서 스크롤 (진짜 '+n+'곳'+(mistaken.length?' · 착각 '+mistaken.length+'곳':'')+')</div>':'');
+  }
   el.innerHTML=
     '<div class="dh-head" onclick="toggleNewDevHome()"><div class="dh-ic" style="background:#2470E0">🆕</div>'
-     +'<div class="dh-tt">현장 신규개발<small>'+(n?demoN+'곳 데모완료 체크됨':'목록에 없던 업체 직접 기록')+'</small></div>'
+     +'<div class="dh-tt">현장 신규개발<small>'+(n?'진짜 신규발굴 '+n+'곳'+(mistaken.length?' · 착각 '+mistaken.length+'곳 제외':''):'목록에 없던 업체 직접 기록')+'</small></div>'
      +'<div class="dh-cnt" style="color:#2470E0">'+n+'<small>곳</small></div><div class="dh-arrow">▼</div></div>'
     +'<div class="dh-body">'
      +'<button class="dh-add-btn" onclick="openNewDev()">➕ 신규개발 추가</button>'
@@ -1688,7 +1730,7 @@ function stToRemote(){
     newdev: (ST.newdev||[]).map(function(o){return {n:o.nm,g:o.gu||''};}),
     dayDone: ST.dayDone||{},
     userfb: fbStripFiles(ST.userfb),
-    sales: ST.sales||0, seeded: true, seedVer:5, _t: Date.now()
+    sales: ST.sales||0, seeded: true, seedVer:7, _t: Date.now()
   };
 }
 function remoteToST(v){
@@ -1784,7 +1826,28 @@ function renderHomeKPI(){
        +'<div class="note">피치 '+pitch+' → 데모 '+mdemo+' · 전환율 '+conv.toFixed(0)+'%</div></div>'
     +'</div>'
     +'<div class="sdash-sales"><div class="lbl">세일즈 = 데모완료 (누적 <span class="sdash-salesn">'+sales+'</span>건)</div>'
-     +'<div class="sdash-note2">목록에서 ‘데모완료’ 체크 시 자동 집계</div></div>';
+     +'<div class="sdash-note2">목록에서 ‘데모완료’ 체크 시 자동 집계</div></div>'
+     +(function(){
+        var ag=demoByDay(),tj=0,tc=0,rows='';
+        for(var i=1;i<=7;i++){var a=ag[i];tj+=a.재영;tc+=a.채영;
+          rows+='<tr><td style="padding:4px 6px;color:#5F6B7A">'+i+'일차<span style="color:#9aa6b2;font-size:10px"> '+a.date+'</span></td>'
+            +'<td style="text-align:center;padding:4px 6px"><span style="color:#028090;font-weight:800">'+a.재영+'</span></td>'
+            +'<td style="text-align:center;padding:4px 6px"><span style="color:#E8590C;font-weight:800">'+a.채영+'</span></td>'
+            +'<td style="text-align:center;padding:4px 6px;font-weight:800">'+a.total+'</td></tr>';
+        }
+        return '<div class="sdash-sales" style="margin-top:8px"><div class="lbl">📅 활동일자별 데모 집계 (재영 / 채영)</div>'
+          +'<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">'
+          +'<tr style="border-bottom:1px solid #e7ecf1"><th style="text-align:left;padding:4px 6px;color:#8A94A0;font-weight:700">일자</th>'
+          +'<th style="text-align:center;padding:4px 6px;color:#028090;font-weight:700">재영</th>'
+          +'<th style="text-align:center;padding:4px 6px;color:#E8590C;font-weight:700">채영</th>'
+          +'<th style="text-align:center;padding:4px 6px;color:#5F6B7A;font-weight:700">합계</th></tr>'
+          +rows
+          +'<tr style="border-top:2px solid #d7dde4"><td style="padding:5px 6px;font-weight:800">합계</td>'
+          +'<td style="text-align:center;padding:5px 6px;color:#028090;font-weight:800">'+tj+'</td>'
+          +'<td style="text-align:center;padding:5px 6px;color:#E8590C;font-weight:800">'+tc+'</td>'
+          +'<td style="text-align:center;padding:5px 6px;font-weight:800">'+(tj+tc)+'</td></tr>'
+          +'</table></div>';
+      })();
   animateFill(el.querySelector('.sdash-fill'), Math.min(100,pctTarget));
   countUp(el.querySelector('.sdash-pct'), pctTarget, 1);
   var _bigs=el.querySelectorAll('.sdash-cell .big');
@@ -1807,7 +1870,7 @@ function initSync(){
       }
       remoteToST(v);
       if((v.seedVer||0) < 3){ ensureDay3Demos(); applyingRemote=true; fbRef.set(stToRemote()); applyingRemote=false; }
-      if((v.seedVer||0) < 5){ ensureDemoLog(); ST._seedVer=5; applyingRemote=true; fbRef.set(stToRemote()); applyingRemote=false; }
+      if((v.seedVer||0) < 7){ ensureDemoLog(); ST._seedVer=7; applyingRemote=true; fbRef.set(stToRemote()); applyingRemote=false; }
       saveST(); rerenderCurrent(); try{ renderHomeKPI(); renderDemoHome(); }catch(e){}
       setSyncBadge(true);
     }, function(err){ console.warn('sync error',err); setSyncBadge(false); });
@@ -1994,23 +2057,35 @@ function renderDemoHome(){
     var badge=e.isNew?'<span class="nd-badge">🆕</span> ':'';
     var pcol=e.person==='재영'?'#028090':(e.person==='채영'?'#E8590C':'');
     var pbadge=e.person?('<span style="display:inline-block;background:'+pcol+';color:#fff;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;margin-left:6px;vertical-align:1px">'+e.person+'</span>'):'';
+    var mis=isDbMistaken(e.nm);
+    var star=mis?'<span style="color:#C0392B;font-weight:900">* </span>':'';
+    var noteTxt=mis?'<span style="color:#C0392B;font-weight:700">DB등록(현장발굴 착각)</span>':(e.note||'');
     var dayTxt=(e.fday?e.fday+'일차':(e.day?e.day+'일차':''))+(e.date?'('+e.date+')':'');
     var nmEsc=e.nm.replace(/'/g,"\\'");
     items+='<div class="dh-item dh-cmp'+(e.isNew?' dh-new':'')+'"><div class="dh-no">'+(i+1)+'</div>'
-      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+badge+e.nm+pbadge+'</div>'
-      +'<div class="dh-meta">'+(dayTxt?dayTxt+' · ':'')+(e.gu||'')+(e.note?' · '+e.note:'')+(e.approx?' · 📍추정좌표':'')+who+ph+'</div></div>'
+      +'<div style="flex:1;min-width:0"><div class="dh-nm">'+star+badge+e.nm+pbadge+'</div>'
+      +'<div class="dh-meta">'+(dayTxt?dayTxt+' · ':'')+(e.gu||'')+(noteTxt?' · '+noteTxt:'')+(e.approx?' · 📍추정좌표':'')+who+ph+'</div></div>'
       +'<button class="dh-edit" onclick="openInfoEditor(\''+nmEsc+'\')">✏️</button></div>';
   }); items='<div class="dh-scroll">'+items+'</div>'+(n>7?'<div class="dh-scrollnote">↕ 카드 안에서 스크롤 ('+n+'곳)</div>':''); }
+  var cleanNote='';
+  if(ST._demoCleaned&&ST._demoCleaned.length){
+    cleanNote='<div style="background:#FFF7E6;border:1px solid #FFD591;border-radius:10px;padding:9px 11px;margin:6px 0 8px;font-size:12px;color:#8A5A00;line-height:1.5">'
+      +'🧹 <b>위페어 원본 28건 기준으로 정리됨</b> — 이전에 남아있던 중복/비표준 데모 '+ST._demoCleaned.length+'건 제외: '
+      +'<b>'+ST._demoCleaned.map(function(x){return x;}).join(', ')+'</b>'
+      +' <button onclick="dismissDemoClean()" style="margin-left:6px;border:none;background:#FFE7BA;color:#8A5A00;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;cursor:pointer">확인</button></div>';
+  }
   el.innerHTML=
     '<div class="dh-head" onclick="toggleDemoHome()"><div class="dh-ic">✅</div>'
      +'<div class="dh-tt">데모완료 업체<small>'+(newCnt?'신규개발 중 '+newCnt+'곳 포함':'완료한 곳 지도·목록으로 보기')+'</small></div>'
      +'<div class="dh-cnt">'+n+'<small>곳</small></div><div class="dh-arrow">▼</div></div>'
     +'<div class="dh-body">'
+     +cleanNote
      +'<button class="dh-map-btn" onclick="goDemoMap()">🗺️ 지도에서 '+n+'곳 보기</button>'
      +items
     +'</div>';
 }
-function toggleDemoHome(){ document.getElementById('demo-home').classList.toggle('open'); }
+function dismissDemoClean(){ ST._demoCleaned=[]; saveST(); renderDemoHome(); }
+window.dismissDemoClean=dismissDemoClean;
 function goDemoMap(){ goSection('map'); showDemoView(); }
 function showDemoView(){
   curDay=-2;
@@ -2604,7 +2679,20 @@ function genCumPDF(){
   days.forEach(function(i){ var d=DAYS[i]; var R=fbDayResults(i); var drs={'상':0,'중':0,'하':0}; d.shops.forEach(function(s){var r=ST.reaction[s.nm]; if(drs[r]!==undefined)drs[r]++;}); var iso=dayIso(i); var hasFb=iso&&ST.userfb&&ST.userfb[iso]&&fbTextLines(ST.userfb[iso]).length;
     inner+='<tr><td class="no">'+d.day+'</td><td>'+fbEsc(d.title)+'</td><td>'+R.vis+'/'+R.total+'</td><td>'+R.dem+'</td><td>'+R.pct+'%</td><td>'+drs['상']+'/'+drs['중']+'/'+drs['하']+'</td><td>'+(hasFb?'O':'–')+'</td></tr>'; });
   inner+='</table>';
-  var demoList=demoEntries().map(function(e){ return {nm:e.nm,fday:e.fday||e.day||'',date:e.date||'',gu:e.gu||'',person:e.person||'',react:ST.reaction[e.nm]||''}; });
+  (function(){
+    var ag=demoByDay(),tj=0,tc=0,rows='';
+    for(var i=1;i<=7;i++){var a=ag[i];tj+=a.재영;tc+=a.채영;
+      rows+='<tr><td class="no">'+i+'일차</td><td class="ad">'+a.date+'</td>'
+        +'<td><span class="pill2" style="background:#028090">'+a.재영+'</span></td>'
+        +'<td><span class="pill2" style="background:#E8590C">'+a.채영+'</span></td>'
+        +'<td><b>'+a.total+'</b></td></tr>';
+    }
+    inner+='<div class="sec">활동일자별 데모 집계 (재영 / 채영) · 위페어 원본 28건</div>'
+      +'<table><tr><th class="no">일차</th><th>날짜</th><th>재영</th><th>채영</th><th>합계</th></tr>'
+      +rows
+      +'<tr><td class="no"><b>합계</b></td><td></td><td><span class="pill2" style="background:#028090"><b>'+tj+'</b></span></td><td><span class="pill2" style="background:#E8590C"><b>'+tc+'</b></span></td><td><b>'+(tj+tc)+'</b></td></tr>'
+      +'</table>';
+  })();
   inner+='<div class="sec">데모 완료 업체 ('+demoList.length+')</div>';
   if(demoList.length){ inner+='<table><tr><th class="no">No</th><th>상호</th><th>담당</th><th>일차</th><th>날짜</th><th>지역</th><th>반응</th></tr>'; demoList.forEach(function(x,i){ var rc=x.react==='상'?'r-sang':(x.react==='중'?'r-jung':(x.react==='하'?'r-ha':'')); inner+='<tr><td class="no">'+(i+1)+'</td><td><b>'+fbEsc(x.nm)+'</b></td><td>'+(x.person?('<span class="pill2" style="background:'+(x.person==='재영'?'#028090':'#E8590C')+'">'+x.person+'</span>'):'<span style="color:#8A94A0">2인1조</span>')+'</td><td>'+(x.fday?x.fday+'일차':'–')+'</td><td class="ad">'+fbEsc(x.date||'')+'</td><td class="ad">'+fbEsc(x.gu||'')+'</td><td>'+(x.react?'<span class="pill2 '+rc+'">'+x.react+'</span>':'–')+'</td></tr>'; }); inner+='</table>'; }
   else inner+='<div class="box">아직 데모 완료 업체가 없습니다.</div>';
