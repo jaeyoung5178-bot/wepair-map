@@ -133,6 +133,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .sdash-off{color:#F6C667 !important}
 .sdash-sales{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border-radius:12px;padding:11px 14px;margin-top:11px}
 .sdash-sales .lbl{font-size:11px;color:#cbd5e1;font-weight:700}
+.sdash-collapse{display:block!important;padding:6px 8px}
+.demo-agg-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:6px 6px;font-size:11px;color:#cbd5e1;font-weight:700;text-align:left}
+.demo-agg-toggle .daggchev{font-size:11px;color:#8ab4f8;font-weight:800;white-space:nowrap;margin-left:8px}
+.demo-agg-body{display:none}
+.sdash-collapse.open .demo-agg-body{display:block}
 .sdash-note2{font-size:11px;color:#9fb3c4;font-weight:600}
 .demo-home{background:#fff;border-radius:16px;margin:0 12px 16px;box-shadow:0 2px 14px rgba(15,31,46,.07);overflow:hidden}
 .dh-head{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer}
@@ -145,6 +150,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .dh-body{display:none;padding:0 16px 14px}
 .demo-home.open .dh-body{display:block}
 .demo-home.open .dh-arrow{transform:rotate(180deg)}
+.ad-sum{display:flex;gap:6px;margin:2px 0 8px}
+.ad-sc{flex:1;background:#F4F7FB;border-radius:10px;padding:8px 3px;text-align:center}
+.ad-sc b{display:block;font-size:18px;font-weight:900;color:#0C2546;line-height:1.1}
+.ad-sc span{font-size:9.5px;color:#5F6B7A}
+.ad-tot{font-size:11.5px;color:#5F6B7A;margin-bottom:9px}
+.ad-tot b{color:#0C2546}
+.ad-scroll{max-height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;padding-right:2px}
+.ad-item{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid #eef0f3;border-radius:11px;padding:9px 10px}
+.ad-rank{width:22px;height:22px;flex:none;border-radius:50%;background:#0C2546;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ad-main{flex:1;min-width:0}
+.ad-nm{font-size:13px;font-weight:800;color:#1a2b3c;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.ad-p{color:#fff;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800}
+.ad-tier{color:#fff;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700}
+.ad-bar{height:6px;background:#eef0f3;border-radius:4px;margin:5px 0 4px;overflow:hidden}
+.ad-bar-fill{height:100%;border-radius:4px;min-width:4px}
+.ad-meta{font-size:11.5px;color:#5F6B7A}
+.ad-meta b{color:#0C2546}
+.ad-uid{color:#9aa6b2;font-family:monospace;font-size:10.5px}
+.ad-up{color:#1E9E6A;font-size:10px;font-weight:900;margin-left:1px}
+.ad-why{margin-top:5px;font-size:11px;line-height:1.45;border-radius:8px;padding:6px 8px}
+.ad-why b{font-weight:800}
+.ad-win{background:#E8F8F0;color:#1B7A52}
+.ad-star{background:#FFF4E0;color:#9A6400}
+.ad-warn{background:#FFF1F0;color:#B0392F}
+.ad-call{background:#EAF1FF;color:#2456B0}
+.ad-strat{margin-top:11px;border-top:1px dashed #e3e8ee;padding-top:10px}
+.ad-strat-ttl{font-size:12px;font-weight:800;color:#0C2546;margin-bottom:7px}
+.ad-act{font-size:11.5px;line-height:1.5;border-radius:8px;padding:6px 9px;margin-bottom:5px}
+.ad-act b{font-weight:800}
+.ad-low{background:#F4F7FB;color:#46566a}
+.admin-bar{margin:0 12px 12px;display:flex;justify-content:flex-end}
+.admin-btn{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;border:1px solid #d8dee6;background:#fff;color:#5F6B7A;border-radius:999px;padding:6px 13px;cursor:pointer}
+.admin-btn.on{background:#0C2546;color:#fff;border-color:#0C2546}
+.ad-byperson{margin-top:11px;border-top:1px dashed #e3e8ee;padding-top:10px}
+.ad-bp-ttl{font-size:12px;font-weight:800;color:#0C2546;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ad-admin-tag{font-size:9.5px;font-weight:800;color:#fff;background:#0C2546;border-radius:5px;padding:1px 6px;vertical-align:1px}
+.ad-bp-row{display:flex;gap:8px}
+.ad-bp{flex:1;border:1px solid #eef0f3;border-radius:11px;padding:11px 12px;background:#fff}
+.ad-bp-name{font-size:12px;font-weight:800;margin-bottom:4px}
+.ad-bp-ret{font-size:24px;font-weight:900;line-height:1}
+.ad-bp-ret small{font-size:11px;color:#5F6B7A;font-weight:700}
+.ad-bp-meta{font-size:10.5px;color:#5F6B7A;margin-top:6px;line-height:1.55}
+.ad-bp-meta b{color:#0C2546}
+.ad-bp-note{font-size:10.5px;color:#9aa6b2;margin-top:7px}
 .dh-map-btn{width:100%;margin:2px 0 10px;background:#2470E0;color:#fff;border:none;border-radius:11px;padding:11px;font-size:12.5px;font-weight:800;cursor:pointer}
 .dh-item{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid #f0eef7}
 .dh-no{width:24px;height:24px;border-radius:50%;background:#E8F1FF;color:#154E9E;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -713,6 +762,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
   </div>
 </div>
 
+<!-- ── 관리자 모드 PIN 모달 ── -->
+<div id="admin-lock" style="position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:32px 22px;background:rgba(12,37,70,.55);backdrop-filter:blur(4px)">
+  <div class="lk-card" style="position:relative">
+    <button onclick="closeAdmin()" style="position:absolute;top:12px;right:14px;border:none;background:none;font-size:20px;color:#9aa6b2;cursor:pointer;line-height:1">&times;</button>
+    <div class="lk-lock"><span class="lk-sw">관리자<b> 모드</b></span></div>
+    <div class="lk-div"></div>
+    <div class="lk-sub">관리자 전용 화면입니다<br><b>관리자 PIN 4자리</b>를 입력하세요</div>
+    <div style="display:flex;justify-content:center;gap:15px;margin-bottom:18px" id="admin-pin-dots">
+      <div class="pin-dot" id="adot0"></div>
+      <div class="pin-dot" id="adot1"></div>
+      <div class="pin-dot" id="adot2"></div>
+      <div class="pin-dot" id="adot3"></div>
+    </div>
+    <div id="admin-pin-error" class="lk-err"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;max-width:248px;margin:0 auto">
+      <button class="pin-key" onclick="adminPin('1')">1</button>
+      <button class="pin-key" onclick="adminPin('2')">2</button>
+      <button class="pin-key" onclick="adminPin('3')">3</button>
+      <button class="pin-key" onclick="adminPin('4')">4</button>
+      <button class="pin-key" onclick="adminPin('5')">5</button>
+      <button class="pin-key" onclick="adminPin('6')">6</button>
+      <button class="pin-key" onclick="adminPin('7')">7</button>
+      <button class="pin-key" onclick="adminPin('8')">8</button>
+      <button class="pin-key" onclick="adminPin('9')">9</button>
+      <div></div>
+      <button class="pin-key" onclick="adminPin('0')">0</button>
+      <button class="pin-key pin-del" onclick="adminDel()">&#9003;</button>
+    </div>
+    <div class="lk-foot">관리자 전용 · 담당자별 정착률 / 데모 집계</div>
+  </div>
+</div>
+
 
 <!-- ─────────────────────────────────────
   섹션 0: 홈
@@ -724,9 +805,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
     <div class="hero-sub">공업사 방문영업 전 과정 가이드<br>세일즈웍스 × 위페어 | 2026</div>
   </div>
 
+  <div id="admin-bar" class="admin-bar"></div>
   <div id="sales-dash" class="sdash"></div>
   <div id="demo-home" class="demo-home"></div>
   <div id="newdev-home" class="demo-home"></div>
+  <div id="adoption-home" class="demo-home adopt-card"></div>
 
   <div class="stat-row">
     <div class="stat-card"><div class="stat-num">573</div><div class="stat-label">타겟 업체</div></div>
@@ -1500,8 +1583,151 @@ const DEMO_LOG=[
 ];
 const DEMO_META={}; DEMO_LOG.forEach(function(e){ DEMO_META[e.nm]={fday:e.fday,date:e.date,person:e.person,gu:e.gu}; });
 function demoMetaOf(nm){ return DEMO_META[nm]||null; }
+// 담당자: 동선 데이터에 person이 없으면(1·2일차) DEMO_LOG 기록에서 보강
+function personOf(s){ if(s&&s.person) return s.person; var m=s&&DEMO_META[s.nm]; return m?m.person:null; }
+// 그날 실제 데모완료 중 동선 목록 밖(DB등록) 업체 — DEMO_LOG(fday)+DEMO_EXTRA(좌표)로 주입
+function offRouteDemosForDay(di){
+  if(di<0||!DAYS[di]||DAYS[di].extra) return [];
+  var fday=DAYS[di].day, inRoute={};
+  DAYS[di].shops.forEach(function(s){ inRoute[s.nm]=true; });
+  var out=[];
+  DEMO_LOG.forEach(function(e){
+    if(e.fday===fday && !inRoute[e.nm]){
+      var ex=DEMO_EXTRA[e.nm];
+      if(ex && ex.la && ex.ln){ out.push({n:50+out.length+1,nm:e.nm,ad:ex.note||'',la:ex.la,ln:ex.ln,gu:e.gu||ex.gu,person:e.person,_off:true}); }
+    }
+  });
+  return out;
+}
 // 활동일자별 데모 집계 (재영/채영) — 위페어 원본 28건 기준
 const DEMO_DAY_DATE={1:'6/16',2:'6/17',3:'6/18',4:'6/19',5:'6/23',6:'6/24',7:'6/25'};
+// ── 위페어 실사용 로그(매칭/완료) — 입고(reg)·사진(photo) · 6/16~6/25 (재영=we_sales003 / 채영=we_sales002)
+const USAGE_LOG=[
+  {nm:'주안현대',person:'채영',date:'6/25',reg:2,photo:7,uid:'mijin'},
+  {nm:'(주)제일자동차공업사',person:'채영',date:'6/25',reg:2,photo:4,uid:'zz1111'},
+  {nm:'로드모터스',person:'채영',date:'6/24',reg:38,photo:342,uid:'sesttop'},
+  {nm:'붕붕모터스',person:'채영',date:'6/23',reg:7,photo:57,uid:'bb1234'},
+  {nm:'서부공단모터스',person:'채영',date:'6/23',reg:2,photo:10,uid:'0403love'},
+  {nm:'아트샵모터스(주)',person:'채영',date:'6/19',reg:2,photo:2,uid:'ss8893'},
+  {nm:'조은모터스',person:'채영',date:'6/19',reg:2,photo:2,uid:'jemsandyn'},
+  {nm:'부천현대자동차공업사',person:'채영',date:'6/18',reg:3,photo:3,uid:'unsb12332'},
+  {nm:'(주)1급이글자동차',person:'채영',date:'6/18',reg:2,photo:4,uid:'at75790'},
+  {nm:'아셀 1급자동차공업사',person:'채영',date:'6/18',reg:5,photo:29,uid:'cara1234'},
+  {nm:'에이원모터스',person:'채영',date:'6/17',reg:2,photo:6,uid:'jdh91339'},
+  {nm:'부평스카이',person:'채영',date:'6/16',reg:2,photo:4,uid:'Sky45656'},
+  {nm:'EU모터스',person:'채영',date:'6/16',reg:3,photo:4,uid:'eu2680638'},
+  {nm:'신흥현대자동차공업사',person:'재영',date:'6/25',reg:2,photo:2,uid:'tlr4766'},
+  {nm:'국제자동차공업사',person:'재영',date:'6/25',reg:5,photo:55,uid:'bb8711'},
+  {nm:'메르시자동차',person:'재영',date:'6/24',reg:4,photo:9,uid:'smkty82'},
+  {nm:'성진모터스',person:'재영',date:'6/24',reg:2,photo:25,uid:'sungjin'},
+  {nm:'(주)이레모터스',person:'재영',date:'6/23',reg:2,photo:8,uid:'yoou6345'},
+  {nm:'광일자동차정비공업사',person:'재영',date:'6/23',reg:6,photo:8,uid:'ksn1807'},
+  {nm:'대주모터스',person:'재영',date:'6/19',reg:2,photo:8,uid:'hero'},
+  {nm:'현대모터스',person:'재영',date:'6/19',reg:2,photo:6,uid:'moon9967'},
+  {nm:'드림자동차서비스',person:'재영',date:'6/18',reg:2,photo:4,uid:'at22710'},
+  {nm:'형제자동차공업사',person:'재영',date:'6/18',reg:17,photo:369,uid:'hj123'},
+  {nm:'불루모터스정비',person:'재영',date:'6/18',reg:2,photo:2,uid:'Blue'},
+  {nm:'글로벌자동차공업사',person:'재영',date:'6/17',reg:14,photo:180,uid:'gm250401'},
+  {nm:'㈜삼삼오',person:'재영',date:'6/16',reg:2,photo:3,uid:'ss335'},
+  {nm:'현대자동차공업사',person:'재영',date:'6/16',reg:2,photo:2,uid:'zhtm211'}
+];
+const USAGE_MAP={}; USAGE_LOG.forEach(function(u){ USAGE_MAP[u.nm]=u; });
+function usageOf(nm){ return USAGE_MAP[nm]||null; }
+// 정착 사유/팔로업 메모 — 현장 피드백 기반(추측 아님)
+const ADOPT_NOTE={
+ '형제자동차공업사':{kind:'win',tag:'현장 서포트 → 정착',txt:'AOS 사진청구가 복잡 → 위페어와 연결·기능 안내 진행 → 이후 확실히 정착'},
+ '아셀 1급자동차공업사':{kind:'win',tag:'현장 설치 시연',txt:'데모·설치 60분 직접 진행 → 손에 익은 뒤 꾸준히 사용'},
+ '로드모터스':{kind:'star',tag:'주력 사용(사유 미파악)',txt:'입고 38·사진 342로 압도적 — 왜 잘 쓰는지 인터뷰해 성공패턴 확보 권장'},
+ '글로벌자동차공업사':{kind:'star',tag:'주력 사용(사유 미파악)',txt:'입고 14·사진 180 — 첫 데모군 중 최상위 정착, 성공요인 인터뷰 권장'},
+ '드림자동차서비스':{kind:'warn',tag:'경쟁 비교 중',txt:'오토X와 비교해 고민 → 차별점 재안내·사용 독려 필요'},
+ '불루모터스정비':{kind:'warn',tag:'등록만 완료',txt:'대소문자 이슈 해결·등록까지 OK → 첫 실사용 입고 확인 콜 필요'},
+ '대주모터스':{kind:'call',tag:'팔로업 예정',txt:'사진 8장 등 사용 흔적 → 전화로 활용도·추가기능 점검 예정'},
+ '위너모터스':{kind:'call',tag:'긍정 검토(파이프라인)',txt:'전화 컨택 시 긍정 검토 — 아직 본격 사용 전, 재컨택으로 첫 입고 유도'}
+};
+function adoptTier(u){ if(!u) return 'none'; if(u.reg>=5||u.photo>=25) return 'heavy'; if(u.reg>=3||u.photo>=6) return 'active'; return 'low'; }
+function adoptScore(u){ return u?(u.reg*10+u.photo):0; }
+function adoptStats(){
+  var reg2=0,act=0,heavy=0,treg=0,tphoto=0;
+  USAGE_LOG.forEach(function(u){ treg+=u.reg; tphoto+=u.photo; if(u.reg>2)reg2++; if(u.photo>=10)act++; if(adoptTier(u)==='heavy')heavy++; });
+  return {n:USAGE_LOG.length,reg2:reg2,photoActive:act,heavy:heavy,treg:treg,tphoto:tphoto};
+}
+function isAdmin(){ return !!(typeof ST!=='undefined' && ST && ST.admin); }
+function setAdmin(on){ if(typeof ST==='undefined'||!ST) return; ST.admin=!!on; saveST(); try{renderAdminBar();}catch(e){} try{renderHomeKPI();}catch(e){} }
+var _adminPin='';
+function openAdmin(){ if(isAdmin()){ setAdmin(false); return; } _adminPin=''; updateAdminDots(); var e=document.getElementById('admin-pin-error'); if(e)e.textContent=''; var l=document.getElementById('admin-lock'); if(l) l.style.display='flex'; }
+function closeAdmin(){ var l=document.getElementById('admin-lock'); if(l) l.style.display='none'; }
+function adminPin(n){ if(_adminPin.length>=4) return; _adminPin+=n; updateAdminDots(); if(_adminPin.length===4) setTimeout(checkAdmin,120); }
+function adminDel(){ _adminPin=_adminPin.slice(0,-1); var e=document.getElementById('admin-pin-error'); if(e)e.textContent=''; updateAdminDots(); }
+function updateAdminDots(){ for(var i=0;i<4;i++){ var d=document.getElementById('adot'+i); if(d) d.classList.toggle('filled', i<_adminPin.length); } }
+function checkAdmin(){ if(_adminPin==='0001'){ closeAdmin(); setAdmin(true); } else { var e=document.getElementById('admin-pin-error'); if(e)e.textContent='비밀번호가 올바르지 않습니다.'; _adminPin=''; updateAdminDots(); var dots=document.getElementById('admin-pin-dots'); if(dots){ dots.style.animation='shake .3s'; setTimeout(function(){dots.style.animation='';},300); } } }
+function renderAdminBar(){ var b=document.getElementById('admin-bar'); if(!b) return; var on=isAdmin(); b.innerHTML='<button class="admin-btn'+(on?' on':'')+'" onclick="openAdmin()">'+(on?'🔓 관리자 모드 ON · 로그아웃':'🔒 관리자 모드')+'</button>'; }
+function personAdopt(name){
+  var arr=USAGE_LOG.filter(function(u){return u.person===name;});
+  var h=0,a=0,l=0,reg=0,ph=0;
+  arr.forEach(function(u){ var t=adoptTier(u); if(t==='heavy')h++; else if(t==='active')a++; else l++; reg+=u.reg; ph+=u.photo; });
+  var n=arr.length; return {n:n,heavy:h,active:a,low:l,reg:reg,photo:ph,ret:n?Math.round((h+a)/n*100):0};
+}
+function toggleAdoptHome(){ var el=document.getElementById('adoption-home'); if(el) el.classList.toggle('open'); }
+function renderAdoptionHome(){
+  var el=document.getElementById('adoption-home'); if(!el) return;
+  var s=adoptStats();
+  var retN=0; USAGE_LOG.forEach(function(u){ var t=adoptTier(u); if(t==='heavy'||t==='active') retN++; });
+  var ret=s.n?Math.round(retN/s.n*100):0;
+  var sorted=USAGE_LOG.slice().sort(function(a,b){return adoptScore(b)-adoptScore(a);});
+  var maxP=Math.max.apply(null,USAGE_LOG.map(function(u){return u.photo;}));
+  var tierLbl={heavy:'정착',active:'사용중',low:'초기'};
+  var tierCol={heavy:'#1E9E6A',active:'#2470E0',low:'#9aa6b2'};
+  function esc(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function row(u,i){
+    var t=adoptTier(u); var pc=PCOL[u.person]||{mk:'888'};
+    var note=ADOPT_NOTE[u.nm];
+    var barw=Math.max(4,Math.round(u.photo/maxP*100));
+    return '<div class="ad-item">'
+      +'<div class="ad-rank">'+(i+1)+'</div>'
+      +'<div class="ad-main"><div class="ad-nm">'+esc(u.nm)
+        +(isAdmin()?'<span class="ad-p" style="background:#'+pc.mk+'">'+u.person+'</span>':'')
+        +'<span class="ad-tier" style="background:'+tierCol[t]+'">'+tierLbl[t]+'</span></div>'
+      +'<div class="ad-bar"><div class="ad-bar-fill" style="width:'+barw+'%;background:#'+pc.mk+'"></div></div>'
+      +'<div class="ad-meta">입고 <b>'+u.reg+'</b>'+(u.reg>2?'<span class="ad-up">▲</span>':'')+' · 사진 <b>'+u.photo+'</b> · '+u.date+' · <span class="ad-uid">'+esc(u.uid)+'</span></div>'
+      +(note?'<div class="ad-why ad-'+note.kind+'"><b>'+note.tag+'</b> — '+note.txt+'</div>':'')
+      +'</div></div>';
+  }
+  var rows=sorted.map(row).join('');
+  var adminBlock='';
+  if(isAdmin()){
+    var jy=personAdopt('재영'), cy=personAdopt('채영');
+    function bpCard(name,col,d){
+      return '<div class="ad-bp" style="border-top:3px solid '+col+'"><div class="ad-bp-name" style="color:'+col+'">'+name+'</div>'
+        +'<div class="ad-bp-ret" style="color:'+col+'">'+d.ret+'<small>% 유지</small></div>'
+        +'<div class="ad-bp-meta">데모 <b>'+d.n+'</b>곳 · 정착 '+d.heavy+' · 사용중 '+d.active+' · 초기 '+d.low+'<br>입고 합 <b>'+d.reg+'</b> · 사진 합 <b>'+d.photo+'</b></div></div>';
+    }
+    adminBlock='<div class="ad-byperson"><div class="ad-bp-ttl">👤 담당자별 정착률 <span class="ad-admin-tag">관리자 전용</span></div>'
+      +'<div class="ad-bp-row">'+bpCard('재영','#028090',jy)+bpCard('채영','#E8590C',cy)+'</div>'
+      +'<div class="ad-bp-note">유지율 = (정착+사용중) / 데모 업장 수</div></div>';
+  }
+  el.innerHTML=
+    '<div class="dh-head" onclick="toggleAdoptHome()"><div class="dh-ic">📊</div>'
+     +'<div class="dh-tt">데모 → 실사용 정착 분석<small>입고·사진으로 본 실제 활용도 ('+s.n+'곳)</small></div>'
+     +'<div class="dh-cnt">'+s.heavy+'<small>정착</small></div><div class="dh-arrow">▼</div></div>'
+    +'<div class="dh-body">'
+     +'<div class="ad-sum">'
+       +'<div class="ad-sc"><b>'+s.n+'</b><span>실사용 기록</span></div>'
+       +'<div class="ad-sc"><b>'+s.reg2+'</b><span>추가입고 2대↑</span></div>'
+       +'<div class="ad-sc"><b>'+s.photoActive+'</b><span>사진활발 10장↑</span></div>'
+       +'<div class="ad-sc"><b>'+s.heavy+'</b><span>헤비 정착</span></div>'
+     +'</div>'
+     +'<div class="ad-tot">누적 입고 <b>'+s.treg+'대</b> · 누적 사진 <b>'+s.tphoto+'장</b> · 유지율 <b>'+ret+'%</b> <span style="color:#9aa6b2">(정착+사용중)</span></div>'
+     +'<div class="ad-scroll">'+rows+'</div>'
+     +adminBlock
+     +'<div class="ad-strat"><div class="ad-strat-ttl">📌 정착 전략 · 팔로업</div>'
+       +'<div class="ad-act ad-win">✅ <b>형제·아셀</b> = 현장 서포트가 정착으로. AOS 사진청구 안내·설치까지 끝내고 나오기를 <b>표준 절차화</b>.</div>'
+       +'<div class="ad-act ad-star">🔍 <b>로드·글로벌</b> = 입고 폭증 주력 사용. <b>왜 잘 쓰는지 인터뷰</b>해 성공패턴을 플레이북에 반영.</div>'
+       +'<div class="ad-act ad-call">📞 <b>위너</b>(긍정 검토)·<b>대주</b>(사용 흔적) = 재컨택해 <b>첫 입고 전환</b> 유도.</div>'
+       +'<div class="ad-act ad-warn">⚠️ <b>드림</b>(오토X 비교)·<b>불루</b>(등록만) = 차별점 재안내·첫 실사용 확인 콜.</div>'
+       +'<div class="ad-act ad-low">🕒 초기군(입고 2·사진 ≤4) = 데모 후 <b>1주 내 팔로업 콜</b>로 첫 추가입고 유도.</div>'
+     +'</div>'
+    +'</div>';
+}
 function demoByDay(){
   var agg={}; for(var i=1;i<=7;i++) agg[i]={fday:i,date:DEMO_DAY_DATE[i],재영:0,채영:0,total:0};
   DEMO_LOG.forEach(function(e){ if(agg[e.fday]){ agg[e.fday][e.person]=(agg[e.fday][e.person]||0)+1; agg[e.fday].total++; } });
@@ -1558,7 +1784,9 @@ function renderDayBar(d){
   var done = !!(d && !d.extra && !d.dbmiss && ST.dayDone && ST.dayDone[d.day]);
   if(!done){ dres.className=''; dres.innerHTML=''; return false; }
   var a=dayAgg(d);
-  var demos=d.shops.filter(function(s){return ST.demo[s.nm];}).map(function(s){return s.nm+(s.person?' ('+s.person+')':'');});
+  var offsB=offRouteDemosForDay(d.day-1);
+  var demos=d.shops.filter(function(s){return ST.demo[s.nm];}).map(function(s){return s.nm+(personOf(s)?' ('+personOf(s)+')':'');})
+    .concat(offsB.map(function(s){return s.nm+' ('+s.person+')';}));
   var iso=dayIso(d.day-1);
   var ufb=iso&&ST.userfb&&ST.userfb[iso];
   var fbLines=ufb?fbMergedLines(ufb):[];
@@ -1566,7 +1794,7 @@ function renderDayBar(d){
   var html='<div class="dres-box"><div class="dres-top">'
     +'<span class="dres-ttl">\u2705 '+d.day+'\uc77c\ucc28 \uacb0\uacfc</span>'
     +'<span class="dres-chip tl">\ubc29\ubb38 '+a.vis+'/'+a.total+'</span>'
-    +'<span class="dres-chip gn">\ub370\ubaa8 '+a.demo+'</span>'
+    +'<span class="dres-chip gn">\ub370\ubaa8 '+demos.length+'</span>'
     +'<span class="dres-chip og">\uc804\ud658 '+a.pct+'%</span>'
     +(a.rev?'<span class="dres-chip">\uc7ac\ubc29\ubb38 '+a.rev+'</span>':'')
     +'</div>'
@@ -1828,6 +2056,7 @@ function renderHomeKPI(){
     +'<div class="sdash-sales"><div class="lbl">세일즈 = 데모완료 (누적 <span class="sdash-salesn">'+sales+'</span>건)</div>'
      +'<div class="sdash-note2">목록에서 ‘데모완료’ 체크 시 자동 집계</div></div>'
      +(function(){
+        if(!isAdmin()) return '';
         var ag=demoByDay(),tj=0,tc=0,rows='';
         for(var i=1;i<=7;i++){var a=ag[i];tj+=a.재영;tc+=a.채영;
           rows+='<tr><td style="padding:4px 6px;color:#5F6B7A">'+i+'일차<span style="color:#9aa6b2;font-size:10px"> '+a.date+'</span></td>'
@@ -1835,7 +2064,9 @@ function renderHomeKPI(){
             +'<td style="text-align:center;padding:4px 6px"><span style="color:#E8590C;font-weight:800">'+a.채영+'</span></td>'
             +'<td style="text-align:center;padding:4px 6px;font-weight:800">'+a.total+'</td></tr>';
         }
-        return '<div class="sdash-sales" style="margin-top:8px"><div class="lbl">📅 활동일자별 데모 집계 (재영 / 채영)</div>'
+        return '<div class="sdash-sales sdash-collapse open" id="demo-agg-box" style="margin-top:8px">'
+          +'<button type="button" class="demo-agg-toggle" onclick="toggleDemoAgg()"><span>📅 활동일자별 데모 집계 (재영 / 채영) <span class="ad-admin-tag">관리자 전용</span></span><span class="daggchev">접기 −</span></button>'
+          +'<div class="demo-agg-body">'
           +'<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">'
           +'<tr style="border-bottom:1px solid #e7ecf1"><th style="text-align:left;padding:4px 6px;color:#8A94A0;font-weight:700">일자</th>'
           +'<th style="text-align:center;padding:4px 6px;color:#028090;font-weight:700">재영</th>'
@@ -1846,7 +2077,7 @@ function renderHomeKPI(){
           +'<td style="text-align:center;padding:5px 6px;color:#028090;font-weight:800">'+tj+'</td>'
           +'<td style="text-align:center;padding:5px 6px;color:#E8590C;font-weight:800">'+tc+'</td>'
           +'<td style="text-align:center;padding:5px 6px;font-weight:800">'+(tj+tc)+'</td></tr>'
-          +'</table></div>';
+          +'</table></div></div>';
       })();
   animateFill(el.querySelector('.sdash-fill'), Math.min(100,pctTarget));
   countUp(el.querySelector('.sdash-pct'), pctTarget, 1);
@@ -1854,6 +2085,8 @@ function renderHomeKPI(){
   countUpEl(_bigs[0], avg, 2, '<small> / '+AVG_TARGET.toFixed(1)+'</small>');
   countUpEl(_bigs[1], kpi, 1, '<small> : 1</small>');
   countUpEl(el.querySelector('.sdash-salesn'), sales, 0, '');
+  try{ renderAdoptionHome(); }catch(e){}
+  try{ renderAdminBar(); }catch(e){}
 }
 function initSync(){
   if(!syncEnabled()) return;          // 주소 없으면 그대로 로컬 동작
@@ -2108,6 +2341,10 @@ function showDemoView(){
   if(leafmap) setTimeout(function(){leafmap.invalidateSize();},80);
 }
 function toggleDemoHome(){ var el=document.getElementById('demo-home'); if(el) el.classList.toggle('open'); }
+function toggleDemoAgg(){ var b=document.getElementById('demo-agg-box'); if(!b) return; b.classList.toggle('open'); var c=b.querySelector('.daggchev'); if(c) c.textContent=b.classList.contains('open')?'접기 −':'더보기 +'; }
+window.toggleDemoAgg=toggleDemoAgg;
+window.toggleAdoptHome=toggleAdoptHome;
+window.openAdmin=openAdmin; window.closeAdmin=closeAdmin; window.adminPin=adminPin; window.adminDel=adminDel;
 window.toggleDemo=toggleDemo; window.toggleDemoHome=toggleDemoHome; window.goDemoMap=goDemoMap; window.showDemoView=showDemoView;
 function showDbMiss(){
   curDay=-2;
@@ -2718,6 +2955,7 @@ function drawMap(d){
   markers.forEach(m=>leafmap.removeLayer(m)); markers=[];
   if(rline) leafmap.removeLayer(rline);
   const shops=d.shops.filter(function(s){return personFilter==='all'||s.person===personFilter;});
+  var offs=offRouteDemosForDay(curDay).filter(function(s){return personFilter==='all'||s.person===personFilter;});
   const pts=[];
   if(!d._nostart){
     const si=L.divIcon({html:'<div style="width:34px;height:34px;border-radius:50%;background:#0C2546;border:3px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;box-shadow:0 2px 10px rgba(0,0,0,.35)">S</div>',className:'',iconAnchor:[17,17]});
@@ -2726,16 +2964,18 @@ function drawMap(d){
   }
   shops.forEach(s=>pts.push([s.la,s.ln]));
   if(!d._nostart){ rline=L.polyline(pts,{color:'#2470E0',weight:2,opacity:.5,dashArray:'5,8'}).addTo(leafmap); }
-  shops.forEach(function(s){
-    const sz=s.n<=9?26:22,fs=s.n<=9?11:9;
-    const pc=s.person?PCOL[s.person]:null;
-    const mkc=d._demo?'6D4FC4':(pc?pc.mk:gc(s.gu));
-    const ic=L.divIcon({html:'<div style="width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:#'+mkc+';border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font-size:'+fs+'px;font-weight:700;box-shadow:0 2px 7px rgba(0,0,0,.25)">'+s.n+'</div>',className:'',iconAnchor:[sz/2,sz/2]});
+  shops.concat(offs).forEach(function(s){
+    var per=personOf(s);
+    const sz=(typeof s.n==='number'&&s.n<=9)?26:22,fs=(typeof s.n==='number'&&s.n<=9)?11:9;
+    const pc=per?PCOL[per]:null;
+    const mkc=s._off?(pc?pc.mk:'6D4FC4'):(d._demo?'6D4FC4':(pc?pc.mk:gc(s.gu)));
+    const lbl=s._off?'DB':s.n;
+    const ic=L.divIcon({html:'<div style="width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:#'+mkc+';border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font-size:'+(s._off?9:fs)+'px;font-weight:700;box-shadow:0 2px 7px rgba(0,0,0,.25)">'+lbl+'</div>',className:'',iconAnchor:[sz/2,sz/2]});
     const inf=shopInfo(s.nm,s);
     const kakao='https://map.kakao.com/link/to/'+encodeURIComponent(s.nm)+','+s.la+','+s.ln;
     const naver='https://map.naver.com/p/search/'+encodeURIComponent(s.nm+' '+(inf.ad||s.ad));
-    const who=s.person?('<span style="color:#'+pc.mk+';font-weight:800"> · '+s.person+' 담당</span>'):'';
-    const demoTag=ST.demo[s.nm]?'<span style="color:#2470E0;font-weight:800"> · ✅데모완료</span>':'';
+    const who=per?('<span style="color:#'+pc.mk+';font-weight:800"> · '+per+' 담당</span>'):'';
+    const demoTag=(s._off||ST.demo[s.nm])?'<span style="color:#2470E0;font-weight:800"> · ✅데모완료'+(s._off?' · DB등록':'')+'</span>':'';
     const contact=(inf.who||inf.ph)?('<div class="cp-ph">'+(inf.who?'담당 '+inf.who+(inf.ph?' · ':''):'')+(inf.ph||'')+'</div>'):'<div class="cp-ph">'+(s.ph||'번호 없음')+'</div>';
     const popup='<div class="cp"><div class="cp-no">'+((curDay>=0&&DAYS[curDay]&&!DAYS[curDay].extra)?(curDay+1)+'일차 ':'')+s.n+'번 · '+s.gu+who+demoTag+'</div><div class="cp-nm">'+s.nm+'</div><div class="cp-ad">'+(inf.ad||s.ad)+'</div>'+contact+'<div class="cp-navs"><a class="cp-nav cp-naver" href="'+naver+'" target="_blank">네이버</a><a class="cp-nav cp-kakao" href="'+kakao+'" target="_blank">카카오</a></div></div>';
     const mk=L.marker([s.la,s.ln],{icon:ic}).addTo(leafmap).bindPopup(popup,{maxWidth:270});
@@ -2765,23 +3005,24 @@ function drawList(d){
     const visited=!!ST.visited[s.nm];
     const react=ST.reaction[s.nm]||null;
     const rev=!!ST.revisit[s.nm];
-    const demo=!!ST.demo[s.nm];
-    const pc=s.person?PCOL[s.person]:null;
+    const demo=!!ST.demo[s.nm]||!!s._off;
+    var per=personOf(s);
+    const pc=per?PCOL[per]:null;
     const row=document.createElement('div');
     row.className='si'+(visited?' done':'')+(demo?' demorow':'');
     row.id='sli'+s.n;
     const no=document.createElement('div');
     no.className='sno';
-    no.style.background='#'+(pc?pc.bg:gl(s.gu)); no.style.color='#'+(pc?pc.fg:gc(s.gu)); no.textContent=s.n;
+    no.style.background='#'+(pc?pc.bg:gl(s.gu)); no.style.color='#'+(pc?pc.fg:gc(s.gu)); no.textContent=s._off?'DB':s.n;
     no.addEventListener('click',function(e){e.stopPropagation(); flyTo(s.la,s.ln,s.n);});
     row.appendChild(no);
     const inf=shopInfo(s.nm,s);
     const info=document.createElement('div'); info.className='si-info';
-    info.innerHTML='<div class="snm">'+(demo?'<span class="demo-badge">\u2705 \ub370\ubaa8</span> ':'')+s.nm+'</div><div class="sad">'+(inf.ad||'\uc8fc\uc18c \uc5c6\uc74c')+'</div><div class="sph">'+(inf.ph||'\ubc88\ud638 \uc5c6\uc74c')+(inf.who?' \u00b7 '+inf.who:'')+'</div>';
+    info.innerHTML='<div class="snm">'+(s._off?'<span class="demo-badge" style="background:#6D4FC4">DB</span> ':'')+(demo?'<span class="demo-badge">\u2705 \ub370\ubaa8</span> ':'')+s.nm+'</div><div class="sad">'+(inf.ad||'\uc8fc\uc18c \uc5c6\uc74c')+'</div><div class="sph">'+(inf.ph||'\ubc88\ud638 \uc5c6\uc74c')+(inf.who?' \u00b7 '+inf.who:'')+'</div>';
     info.addEventListener('click',function(){ toggleVisit(s.nm); });
     row.appendChild(info);
     const gu=document.createElement('div');
-    if(pc){ gu.className='sgu p-'+(s.person==='\uc7ac\uc601'?'jy':'cy'); gu.textContent=s.person; }
+    if(pc){ gu.className='sgu p-'+(per==='\uc7ac\uc601'?'jy':'cy'); gu.textContent=per; }
     else { gu.className='sgu'; gu.style.background='#'+gl(s.gu); gu.style.color='#'+gc(s.gu); gu.textContent=s.gu; }
     row.appendChild(gu);
     const ctrl=document.createElement('div'); ctrl.className='si-ctrl';
@@ -2843,6 +3084,7 @@ function drawList(d){
   }
   const sortV=function(a,b){return (ST.visited[a.nm]?1:0)-(ST.visited[b.nm]?1:0);};
   const hasPerson=d.shops.some(function(s){return s.person;});
+  var offs=offRouteDemosForDay(curDay);
   let total=d.shops.length, vis=d.shops.reduce(function(a,s){return a+(ST.visited[s.nm]?1:0);},0);
 
   if(done){
@@ -2850,15 +3092,16 @@ function drawList(d){
     var missed=d.shops.filter(function(s){return !ST.visited[s.nm];});
     if(hasPerson){
       ['\uc7ac\uc601','\ucc44\uc601'].forEach(function(name){
-        var arr=visited.filter(function(s){return s.person===name;});
+        var arr=visited.filter(function(s){return s.person===name;}).concat(offs.filter(function(s){return s.person===name;}));
         if(arr.length) appendGroup(name+' \ub2f4\ub2f9 \u00b7 \ubc29\ubb38 '+arr.length+'\uacf3','p-'+(name==='\uc7ac\uc601'?'jy':'cy'),arr,false);
       });
       var np=visited.filter(function(s){return !s.person;});
       if(np.length) appendGroup('\ubc29\ubb38 \uc644\ub8cc \u00b7 '+np.length+'\uacf3','',np,false);
     } else {
-      if(visited.length) appendGroup('\ubc29\ubb38 \uc644\ub8cc \u00b7 '+visited.length+'\uacf3','',visited,false);
+      var vv=visited.concat(offs);
+      if(vv.length) appendGroup('\ubc29\ubb38 \uc644\ub8cc \u00b7 '+vv.length+'\uacf3','',vv,false);
     }
-    if(!visited.length){
+    if(!visited.length && !offs.length){
       var e=document.createElement('div'); e.className='miss-row'; e.style.color='#9aa6b2';
       e.innerHTML='<div class="mr-nm">\ubc29\ubb38\uc73c\ub85c \ud45c\uc2dc\ub41c \uacf3\uc774 \uc5c6\uc2b5\ub2c8\ub2e4 \u2014 \uae30\ub85d \ubaa8\ub4dc\uc5d0\uc11c \ubc29\ubb38 \uc5c5\uccb4\ub97c \uba3c\uc800 \uccb4\ud06c\ud558\uc138\uc694.</div>';
       list.appendChild(e);
@@ -2867,13 +3110,14 @@ function drawList(d){
   } else if(hasPerson){
     ['\uc7ac\uc601','\ucc44\uc601'].forEach(function(name){
       if(personFilter!=='all' && personFilter!==name) return;
-      var arr=d.shops.filter(function(s){return s.person===name;});
+      var arr=d.shops.filter(function(s){return s.person===name;}).concat(offs.filter(function(s){return s.person===name;}));
       if(!arr.length) return;
-      var vc=arr.reduce(function(a,s){return a+(ST.visited[s.nm]?1:0);},0);
+      var vc=arr.reduce(function(a,s){return a+((ST.visited[s.nm]||s._off)?1:0);},0);
       appendGroup(name+' \ub2f4\ub2f9 \u00b7 '+arr.length+'\uacf3 \u00b7 \ubc29\ubb38 '+vc,'p-'+(name==='\uc7ac\uc601'?'jy':'cy'),arr.slice().sort(sortV),false);
     });
   } else {
     d.shops.slice().sort(sortV).forEach(function(s){renderRow(s,list);});
+    offs.forEach(function(s){renderRow(s,list);});
   }
 
   document.getElementById('pttl').textContent= done ? (d.day+'\uc77c\ucc28 \u00b7 \ubc29\ubb38 '+vis+'/'+total+'\uacf3') : ('\ubc29\ubb38 '+vis+' / '+total+'\uacf3');
