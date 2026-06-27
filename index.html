@@ -2107,6 +2107,7 @@ function showDemoView(){
   drawMap(d); drawList(d);
   if(leafmap) setTimeout(function(){leafmap.invalidateSize();},80);
 }
+function toggleDemoHome(){ var el=document.getElementById('demo-home'); if(el) el.classList.toggle('open'); }
 window.toggleDemo=toggleDemo; window.toggleDemoHome=toggleDemoHome; window.goDemoMap=goDemoMap; window.showDemoView=showDemoView;
 function showDbMiss(){
   curDay=-2;
@@ -2926,43 +2927,6 @@ window.toggleQR=toggleQR;
 
 // ── 영상 PIN 제거됨
 
-
-// ── 사이트 진입 PIN
-var SITE_PIN = '8250';
-var sitePinCurrent = '';
-
-function sitePin(n){
-  if(sitePinCurrent.length >= 4) return;
-  sitePinCurrent += n;
-  updateSitePinDots();
-  if(sitePinCurrent.length === 4) setTimeout(checkSitePin, 120);
-}
-function sitePinDel(){
-  sitePinCurrent = sitePinCurrent.slice(0,-1);
-  document.getElementById('site-pin-error').textContent='';
-  updateSitePinDots();
-}
-function updateSitePinDots(){
-  for(var i=0;i<4;i++){
-    var dot=document.getElementById('sdot'+i);
-    if(dot) dot.classList.toggle('filled', i < sitePinCurrent.length);
-  }
-}
-function checkSitePin(){
-  if(sitePinCurrent === SITE_PIN){
-    var lock=document.getElementById('site-lock');
-    lock.style.opacity='0';
-    lock.style.transition='opacity .3s';
-    setTimeout(function(){lock.style.display='none';},300);
-  } else {
-    document.getElementById('site-pin-error').textContent='PIN이 올바르지 않습니다.';
-    sitePinCurrent=''; updateSitePinDots();
-    var dots=document.getElementById('site-pin-dots');
-    dots.style.animation='shake .3s';
-    setTimeout(function(){dots.style.animation='';},300);
-  }
-}
-window.sitePin=sitePin; window.sitePinDel=sitePinDel;
 
 // ── 사이트 진입 PIN
 var SITE_PIN='8250', spCur='';
