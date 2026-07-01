@@ -719,6 +719,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 @keyframes flow3{0%,100%{transform:translate(0,0) scale(1);opacity:.34}
   50%{transform:translate(-60px,46px) scale(1.34);opacity:.5}}
 @media(prefers-reduced-motion:reduce){#site-lock{animation:none!important}.lk-blob{animation:none!important}}
+/* ── 공업사 DB 검색 (홈) ── */
+.ws-wrap{margin:14px 14px 4px;background:linear-gradient(180deg,#ffffff,#FAFCFE);border:1px solid #E6EEF5;border-radius:16px;padding:15px 15px 14px;box-shadow:0 6px 22px rgba(12,37,70,.07),0 1px 0 rgba(255,255,255,.6) inset}
+.ws-head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.ws-head-ic{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:linear-gradient(135deg,#2470E0,#154E9E);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 12px rgba(36,112,224,.28)}
+.ws-title{font-size:15px;font-weight:800;color:#0C2546;letter-spacing:-.2px}
+.ws-sub{font-size:11px;color:#6B7C90;margin-top:1px;line-height:1.35}
+.ws-field{position:relative;display:flex;align-items:center;background:#F3F7FB;border:1.5px solid #E4EDF4;border-radius:12px;transition:border-color .15s,box-shadow .15s,background .15s}
+.ws-field:focus-within{border-color:#2470E0;box-shadow:0 0 0 3px rgba(36,112,224,.12);background:#fff}
+.ws-field-ic{padding-left:13px;font-size:14px;opacity:.55}
+.ws-input{flex:1;border:none;background:transparent;outline:none;padding:13px 10px;font-size:15px;font-weight:600;color:#0C2546;min-width:0}
+.ws-input::placeholder{color:#9AAABB;font-weight:500}
+.ws-clear{width:26px;height:26px;margin-right:8px;border:none;border-radius:50%;background:#D8E2EC;color:#5A6B7D;font-size:17px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ws-clear:active{background:#c4d1de}
+.ws-results{display:none;margin-top:0}
+.ws-results.on{display:block;margin-top:12px}
+.ws-count{font-size:11px;font-weight:700;color:#8595A6;margin:0 2px 8px}
+.ws-card{background:#fff;border:1px solid #E7EEF4;border-radius:13px;padding:12px 13px;margin-bottom:9px;cursor:pointer;transition:transform .12s,box-shadow .12s,border-color .12s;-webkit-tap-highlight-color:transparent}
+.ws-card:active{transform:scale(.985);box-shadow:0 4px 14px rgba(12,37,70,.1);border-color:#CFE0F5}
+.ws-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ws-nm{font-size:14.5px;font-weight:800;color:#12233B;line-height:1.3}
+.ws-go{font-size:12px;font-weight:800;color:#2470E0;flex-shrink:0}
+.ws-meta{font-size:11.5px;color:#6B7C90;margin-top:3px}
+.ws-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.ws-badge{border:none;color:#fff;font-size:11px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;letter-spacing:-.2px;box-shadow:0 2px 6px rgba(12,37,70,.14)}
+.ws-badge:active{filter:brightness(.94)}
+.ws-empty{text-align:center;padding:20px 14px 15px;background:linear-gradient(180deg,#FFFBF2,#FFF7E8);border:1px dashed #F0D69A;border-radius:13px}
+.ws-empty-ic{font-size:30px;margin-bottom:6px}
+.ws-empty-t{font-size:14px;font-weight:800;color:#8a6a12}
+.ws-empty-d{font-size:12px;color:#9a7d33;margin-top:5px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -803,6 +832,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
     <div class="hero-logo">we<span>|</span>pair</div>
     <div style="font-size:16px;font-weight:700;margin-bottom:6px">필드세일즈 플레이북</div>
     <div class="hero-sub">공업사 방문영업 전 과정 가이드<br>세일즈웍스 × 위페어 | 2026</div>
+  </div>
+
+  <div class="ws-wrap">
+    <div class="ws-head">
+      <div class="ws-head-ic">🔍</div>
+      <div>
+        <div class="ws-title">공업사 DB 조회</div>
+        <div class="ws-sub">지나가다 발견한 공업사, DB에 있는지 · 몇일차인지 바로 확인</div>
+      </div>
+    </div>
+    <div class="ws-field">
+      <span class="ws-field-ic">🔎</span>
+      <input id="ws-input" class="ws-input" type="text" inputmode="search" autocomplete="off" placeholder="공업사 이름 검색 (예: 만도, 현대…)" oninput="wsSearch(this.value)">
+      <button id="ws-clear" class="ws-clear" onclick="wsClear()" style="display:none" aria-label="지우기">×</button>
+    </div>
+    <div id="ws-results" class="ws-results"></div>
   </div>
 
   <div id="admin-bar" class="admin-bar"></div>
@@ -3204,6 +3249,96 @@ function checkSP(){
   }
 }
 window.sitePin=sitePin; window.sitePinDel=sitePinDel;
+
+// ── 공업사 DB 검색 (홈 → 지도 연동) ──
+function wsEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function wsNorm(s){
+  return (s||'')
+    .replace(/주식회사|합자회사|유한회사|㈜|\(주\)|（주）|\(합\)|\(유\)|\(합자\)|\(남동\)/g,'')
+    .replace(/\s+/g,'')
+    .toLowerCase();
+}
+var _wsIndex=null;
+function wsBuildIndex(){
+  if(_wsIndex) return _wsIndex;
+  var groups={};
+  DAYS.forEach(function(d,di){
+    d.shops.forEach(function(s){
+      var key=wsNorm(s.nm); if(!key) return;
+      if(!groups[key]) groups[key]={nm:s.nm, occ:[]};
+      groups[key].occ.push({di:di, day:d.day, extra:!!d.extra, gu:s.gu, la:s.la, ln:s.ln, n:s.n, person:s.person||'', db:false});
+    });
+  });
+  try{
+    Object.keys(DEMO_EXTRA).forEach(function(nm){
+      var e=DEMO_EXTRA[nm]; if(e.la==null) return;
+      var key=wsNorm(nm); if(!key) return;
+      if(!groups[key]) groups[key]={nm:nm, occ:[]};
+      var di=(typeof e.day==='number')?e.day-1:-1;
+      groups[key].occ.push({di:di, day:e.day, extra:false, gu:e.gu, la:e.la, ln:e.ln, n:'DB', person:'', db:true});
+    });
+  }catch(err){}
+  _wsIndex=Object.keys(groups).map(function(k){return groups[k];});
+  return _wsIndex;
+}
+function wsSearch(q){
+  var box=document.getElementById('ws-results'); if(!box) return;
+  var cb=document.getElementById('ws-clear'); if(cb) cb.style.display=(q&&q.length)?'flex':'none';
+  var query=wsNorm(q);
+  if(!query){ box.innerHTML=''; box.classList.remove('on'); return; }
+  var idx=wsBuildIndex();
+  var hits=idx.filter(function(g){ return wsNorm(g.nm).indexOf(query)>=0; });
+  hits.sort(function(a,b){
+    var as=wsNorm(a.nm).indexOf(query)===0?0:1, bs=wsNorm(b.nm).indexOf(query)===0?0:1;
+    if(as!==bs) return as-bs;
+    return a.nm.length-b.nm.length;
+  });
+  box.classList.add('on');
+  if(!hits.length){
+    box.innerHTML='<div class="ws-empty">'
+      +'<div class="ws-empty-ic">🧭</div>'
+      +'<div class="ws-empty-t">DB 미등록 공업사</div>'
+      +'<div class="ws-empty-d">방문 리스트에 없는 곳이에요.<br><b>신규 발굴 후보</b>로 좋습니다 — 들어가 보세요!</div>'
+      +'</div>';
+    return;
+  }
+  var html=hits.slice(0,20).map(function(g){
+    var seen={}, occ=g.occ.filter(function(o){var k=o.di+'/'+(o.db?'d':'r'); if(seen[k])return false; seen[k]=1; return true;});
+    occ.sort(function(a,b){return (a.di)-(b.di);});
+    var badges=occ.map(function(o){
+      var label=o.db?('📌 '+o.day+'일차 DB등록'):(o.extra?'✨ +α 후보':(o.day+'일차'));
+      var col=o.extra?'#7c6df0':(o.db?'#0F6E56':'#2470E0');
+      var nsafe=String(o.n).replace(/'/g,'');
+      return '<button class="ws-badge" style="background:'+col+'" onclick="event.stopPropagation();wsGoto('+o.di+','+o.la+','+o.ln+',\''+nsafe+'\')">'+label+'</button>';
+    }).join('');
+    var f=occ[0];
+    var per=f.person?(' · '+f.person+' 담당'):'';
+    var fn=String(f.n).replace(/'/g,'');
+    return '<div class="ws-card" onclick="wsGoto('+f.di+','+f.la+','+f.ln+',\''+fn+'\')">'
+      +'<div class="ws-card-top"><div class="ws-nm">'+wsEsc(g.nm)+'</div><div class="ws-go">지도 ›</div></div>'
+      +'<div class="ws-meta">'+wsEsc(f.gu)+per+'</div>'
+      +'<div class="ws-badges">'+badges+'</div>'
+      +'</div>';
+  }).join('');
+  box.innerHTML='<div class="ws-count">'+hits.length+'곳 찾음 · 일차를 누르면 지도로 이동</div>'+html;
+}
+function wsGoto(di,la,ln,n){
+  if(di<0){ showToast('좌표 정보가 없는 업체입니다'); return; }
+  var wasInit=mapInited;
+  goSection('map');
+  setTimeout(function(){
+    try{
+      switchDay(di);
+      if(typeof leafmap!=='undefined' && leafmap){ leafmap.invalidateSize(); }
+      setTimeout(function(){ try{ flyTo(la,ln,n); }catch(e){} }, 240);
+    }catch(e){}
+  }, wasInit?90:380);
+}
+function wsClear(){
+  var i=document.getElementById('ws-input'); if(i){ i.value=''; i.focus(); }
+  wsSearch('');
+}
+window.wsSearch=wsSearch; window.wsGoto=wsGoto; window.wsClear=wsClear;
 
 window.goSection=goSection;window.toggleFaq=toggleFaq;window.toggleChk=toggleChk;
 window.resetChk=resetChk;window.flyTo=flyTo;window.togglePanel=togglePanel;
