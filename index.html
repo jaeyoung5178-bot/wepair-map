@@ -748,6 +748,195 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans
 .ws-empty-ic{font-size:30px;margin-bottom:6px}
 .ws-empty-t{font-size:14px;font-weight:800;color:#8a6a12}
 .ws-empty-d{font-size:12px;color:#9a7d33;margin-top:5px;line-height:1.5}
+/* ==== RZ DESIGN LAYER START ==== */
+
+/* ═══════════════════════════════════════════════════════════
+   REDESIGN LAYER · WePair 필드세일즈 · 프레젠테이션/IA 재설계
+   (원본 로직·데이터·동기화 미변경 · 스타일만 위에 덧입힘)
+   ─ 5-Color System / Apple-style Typography / 여백 재설계 / 120–180ms Motion
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 5색 시스템 + 스케일 토큰 (원본 :root를 덮어씀) ── */
+:root{
+  --rz-blue:#2563EB;  --rz-blue-d:#1D4ED8;  --rz-blue-l:#EEF3FF;
+  --rz-green:#16A34A; --rz-green-l:#ECFDF3;
+  --rz-orange:#EA580C;--rz-orange-l:#FFF3EA;
+  --rz-red:#DC2626;   --rz-red-l:#FEF2F2;
+  --rz-ink:#0F172A; --rz-700:#334155; --rz-500:#64748B; --rz-400:#94A3B8;
+  --rz-200:#E2E8F0; --rz-100:#F1F5F9; --rz-surface:#FFFFFF; --rz-bg:#F6F8FC;
+  /* 원본 변수 재매핑 → 앱 전체가 새 색을 씀 */
+  --teal:var(--rz-blue); --teal-d:var(--rz-blue-d); --teal-l:var(--rz-blue-l);
+  --dark:var(--rz-ink); --gray:var(--rz-500); --gray-l:var(--rz-200);
+  --red:var(--rz-red); --red-l:var(--rz-red-l);
+  --green:var(--rz-green); --green-l:var(--rz-green-l);
+  --yellow:var(--rz-orange); --yellow-l:var(--rz-orange-l);
+  --off:var(--rz-100); --white:#fff;
+  --radius:16px; --radius-sm:12px;
+  /* 여백 스케일 */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px;
+  /* 모션 */
+  --rz-dur:150ms; --rz-ease:cubic-bezier(.2,.7,.3,1);
+  --rz-shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 20px rgba(15,23,42,.06);
+  --rz-shadow-lg:0 8px 34px rgba(15,23,42,.12);
+}
+
+/* ── 배경: 오로라를 차분하게(고급/미니멀) ── */
+body{ background:var(--rz-bg)!important; color:var(--rz-ink)!important;
+  font-feature-settings:"tnum" 1,"cv01" 1; -webkit-font-smoothing:antialiased; }
+#app-aurora{ opacity:.35; }
+#app-aurora .ab{ filter:blur(90px); }
+
+/* ── 섹션 하단 여유(FAB·nav와 겹침 방지) ── */
+.section{ padding-bottom:120px!important; }
+
+/* ── 타이포: 숫자 크게 / 제목 굵게 / 보조 연하게 ── */
+.rz-num{ font-variant-numeric:tabular-nums; letter-spacing:-.02em; font-weight:800; }
+
+/* ── 히어로: 컴팩트 & 정제 ── */
+.hero{ background:linear-gradient(135deg,#1E3A8A,#2563EB)!important;
+  border-radius:0 0 26px 26px!important; padding:22px 20px 24px!important;
+  box-shadow:0 10px 30px rgba(37,99,235,.22)!important; }
+.hero-logo{ letter-spacing:.02em; }
+.hero-sub{ opacity:.92; line-height:1.5; }
+
+/* ── 카드 공통(원본 컨테이너 재스킨) ── */
+.sdash, .demo-home, .stat-row, .sync-home, .ws-wrap{
+  background:var(--rz-surface)!important;
+  border:1px solid var(--rz-200)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:var(--rz-shadow)!important;
+}
+.sdash{ padding:20px 18px!important; margin:14px!important; }
+.demo-home{ margin:0 0 12px!important; padding:16px!important; }
+
+/* ── 검색: 크게 & 프라이머리 ── */
+.ws-wrap{ margin:16px 14px 6px!important; padding:16px 16px 15px!important;
+  border:1.5px solid var(--rz-blue-l)!important;
+  box-shadow:0 6px 22px rgba(37,99,235,.10)!important; }
+.ws-input{ font-size:16px!important; }
+
+/* ── 오늘 대시(sdash) 타이포 강화 ── */
+.sdash-ttl{ font-size:15px!important; font-weight:800!important; color:var(--rz-ink)!important; }
+.sdash-sub{ color:var(--rz-500)!important; font-size:12px!important; }
+.sdash-pct{ font-size:46px!important; font-weight:850!important; color:var(--rz-blue)!important;
+  font-variant-numeric:tabular-nums; letter-spacing:-.03em; }
+.sdash-pct small{ font-size:20px; color:var(--rz-400); }
+.sdash-fill{ background:linear-gradient(90deg,var(--rz-blue),var(--rz-blue-d))!important; }
+.sdash-cell .big{ font-size:26px!important; font-weight:800!important; }
+.sdash-on{ color:var(--rz-green)!important; } .sdash-off{ color:var(--rz-orange)!important; }
+.sdash-cell .lbl, .sdash-sales .lbl{ color:var(--rz-500)!important; font-size:11.5px!important; }
+.sdash-cell .note, .sdash-note2{ color:var(--rz-400)!important; }
+
+/* ── 버튼: 넉넉한 터치 + 부드러운 모션 ── */
+.btn{ transition:transform var(--rz-dur) var(--rz-ease), box-shadow var(--rz-dur) var(--rz-ease), background var(--rz-dur) var(--rz-ease)!important; }
+.btn:active{ transform:scale(.985); }
+.btn-full{ padding:15px!important; border-radius:14px!important; font-size:15px!important; font-weight:700!important; }
+.btn-teal{ background:var(--rz-blue)!important; box-shadow:0 6px 16px rgba(37,99,235,.24)!important; }
+.btn-outline{ border:1.5px solid var(--rz-200)!important; color:var(--rz-700)!important; background:#fff!important; }
+
+/* ═══════════ 방문 리스트: Progressive Disclosure ═══════════ */
+/* 기본은 번호·상호·주소·등급만 · 컨트롤(평가/데모/재방문/정보)은 접힘 */
+.si{ align-items:center!important; transition:background var(--rz-dur) var(--rz-ease)!important; }
+.si .si-ctrl{
+  max-height:0; overflow:hidden; opacity:0; padding-top:0!important; margin-top:0!important;
+  transition:max-height 170ms var(--rz-ease), opacity 130ms var(--rz-ease), margin var(--rz-dur) var(--rz-ease);
+  flex-basis:100%;
+}
+.si.rz-open .si-ctrl{ max-height:220px; opacity:1; margin-top:10px!important; }
+/* 펼침 화살표 */
+.rz-exp{ flex:0 0 auto; margin-left:6px; width:30px; height:30px; border:none; cursor:pointer;
+  background:var(--rz-100); color:var(--rz-500); border-radius:9px; font-size:13px; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform var(--rz-dur) var(--rz-ease), background var(--rz-dur) var(--rz-ease); }
+.rz-exp:active{ background:var(--rz-200); }
+.si.rz-open .rz-exp{ transform:rotate(180deg); background:var(--rz-blue-l); color:var(--rz-blue); }
+/* 컨트롤 칩 정돈 */
+.si-ctrl .rxb, .si-ctrl .dmb, .si-ctrl .rvb, .si-ctrl .infb{ border-radius:9px!important; }
+
+/* ═══════════ 홈 재구성 컴포넌트 ═══════════ */
+.rz-eyebrow{ font-size:11px; font-weight:800; letter-spacing:.06em; color:var(--rz-400);
+  text-transform:uppercase; margin:2px 16px 8px; }
+.rz-quick{ margin:6px 14px 4px; display:flex; flex-direction:column; gap:10px; }
+
+/* 아코디언 (더보기·상세) */
+.rz-acc{ margin:10px 14px; background:var(--rz-surface); border:1px solid var(--rz-200);
+  border-radius:var(--radius); box-shadow:var(--rz-shadow); overflow:hidden; }
+.rz-acc > summary{ list-style:none; cursor:pointer; padding:15px 16px; font-size:14px; font-weight:700;
+  color:var(--rz-700); display:flex; align-items:center; gap:10px;
+  transition:background var(--rz-dur) var(--rz-ease); }
+.rz-acc > summary::-webkit-details-marker{ display:none; }
+.rz-acc > summary:active{ background:var(--rz-100); }
+.rz-acc > summary .rz-ico{ font-size:16px; }
+.rz-acc > summary .rz-chev{ margin-left:auto; color:var(--rz-400); font-size:12px;
+  transition:transform var(--rz-dur) var(--rz-ease); }
+.rz-acc[open] > summary .rz-chev{ transform:rotate(180deg); }
+.rz-acc[open] > summary{ border-bottom:1px solid var(--rz-100); }
+.rz-acc-body{ padding:4px 12px 12px; }
+.rz-acc-body .demo-home, .rz-acc-body .stat-row, .rz-acc-body .sync-home,
+.rz-acc-body .sdash{ border:none!important; box-shadow:none!important; margin:0!important; padding:8px 4px!important; }
+.rz-acc-body .admin-bar{ margin:4px 0; }
+
+/* ═══════════ FAB (Floating Action Button) ═══════════ */
+.rz-fab{ position:fixed; right:18px; bottom:86px; z-index:640; width:58px; height:58px; border:none;
+  border-radius:50%; background:var(--rz-blue); color:#fff; font-size:26px; cursor:pointer;
+  box-shadow:0 10px 26px rgba(37,99,235,.42); display:flex; align-items:center; justify-content:center;
+  transition:transform 160ms var(--rz-ease), box-shadow 160ms var(--rz-ease); }
+.rz-fab:active{ transform:scale(.92); }
+.rz-fab.on{ transform:rotate(45deg); background:var(--rz-ink); }
+.rz-fab-menu{ position:fixed; right:20px; bottom:154px; z-index:640; display:flex; flex-direction:column;
+  gap:11px; align-items:flex-end; pointer-events:none; }
+.rz-fab-item{ display:flex; align-items:center; gap:10px; opacity:0; transform:translateY(10px) scale(.96);
+  transition:opacity 150ms var(--rz-ease), transform 150ms var(--rz-ease); pointer-events:none; }
+.rz-fab-menu.open .rz-fab-item{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.rz-fab-menu.open .rz-fab-item:nth-child(1){ transition-delay:20ms; }
+.rz-fab-menu.open .rz-fab-item:nth-child(2){ transition-delay:45ms; }
+.rz-fab-menu.open .rz-fab-item:nth-child(3){ transition-delay:70ms; }
+.rz-fab-menu.open .rz-fab-item:nth-child(4){ transition-delay:95ms; }
+.rz-fab-menu.open .rz-fab-item:nth-child(5){ transition-delay:120ms; }
+.rz-fab-lbl{ background:var(--rz-ink); color:#fff; font-size:12.5px; font-weight:700; padding:7px 11px;
+  border-radius:9px; box-shadow:var(--rz-shadow); white-space:nowrap; }
+.rz-fab-btn{ width:46px; height:46px; border:none; border-radius:50%; background:#fff; color:var(--rz-blue);
+  font-size:19px; cursor:pointer; box-shadow:var(--rz-shadow-lg); display:flex; align-items:center; justify-content:center; }
+.rz-fab-btn:active{ transform:scale(.9); }
+
+/* ═══════════ 하단 네비게이션 재설계 (오늘/방문/검색/피드백/더보기) ═══════════ */
+#nav{ display:none!important; }  /* 원본 nav는 숨김(로직 위해 DOM은 유지) */
+.rz-nav{ position:fixed; left:0; right:0; bottom:0; z-index:600; height:64px;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--rz-200); display:flex; padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+  box-shadow:0 -2px 20px rgba(15,23,42,.05); }
+.rz-nav-btn{ flex:1; border:none; background:none; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:3px; color:var(--rz-400); font-size:10.5px; font-weight:700;
+  border-radius:12px; transition:color var(--rz-dur) var(--rz-ease); }
+.rz-nav-btn .rz-nav-ico{ font-size:20px; line-height:1; transition:transform var(--rz-dur) var(--rz-ease); }
+.rz-nav-btn.on{ color:var(--rz-blue); }
+.rz-nav-btn.on .rz-nav-ico{ transform:translateY(-1px) scale(1.06); }
+.rz-nav-btn:active .rz-nav-ico{ transform:scale(.9); }
+
+/* ═══════════ 더보기 Bottom Sheet ═══════════ */
+.rz-scrim{ position:fixed; inset:0; z-index:670; background:rgba(15,23,42,.44);
+  opacity:0; pointer-events:none; transition:opacity 160ms var(--rz-ease); }
+.rz-scrim.open{ opacity:1; pointer-events:auto; }
+.rz-sheet{ position:fixed; left:0; right:0; bottom:0; z-index:680; background:#fff;
+  border-radius:22px 22px 0 0; box-shadow:0 -12px 40px rgba(15,23,42,.22);
+  transform:translateY(100%); transition:transform 220ms var(--rz-ease);
+  padding:8px 14px calc(18px + env(safe-area-inset-bottom)); max-height:82vh; overflow-y:auto; }
+.rz-sheet.open{ transform:translateY(0); }
+.rz-sheet-grab{ width:38px; height:4px; border-radius:2px; background:var(--rz-200); margin:8px auto 4px; }
+.rz-sheet-ttl{ font-size:16px; font-weight:800; color:var(--rz-ink); padding:6px 4px 12px; }
+.rz-sheet-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.rz-sheet-cell{ background:var(--rz-100); border:1px solid var(--rz-200); border-radius:14px; padding:16px 8px;
+  display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; color:var(--rz-700);
+  font-size:12px; font-weight:700; transition:background var(--rz-dur) var(--rz-ease), transform var(--rz-dur) var(--rz-ease); }
+.rz-sheet-cell:active{ transform:scale(.96); background:var(--rz-200); }
+.rz-sheet-cell .rz-sc-ico{ font-size:24px; }
+.rz-sheet-cell.rz-admin{ background:var(--rz-blue-l); border-color:#D6E2FF; color:var(--rz-blue-d); }
+
+@media(prefers-reduced-motion:reduce){
+  .rz-fab-item,.rz-sheet,.rz-scrim,.si .si-ctrl,.rz-acc>summary .rz-chev{ transition:none!important; }
+}
+
+/* ==== RZ DESIGN LAYER END ==== */
 </style>
 </head>
 <body>
@@ -3351,6 +3540,207 @@ renderDemoHome();
 renderNewDevHome();
 renderSyncHome();
 try{ initSync(); }catch(e){}
+</script>
+<!-- ==== RZ ENHANCEMENT LAYER ==== -->
+<script>
+/* ═══════════════════════════════════════════════════════════
+   REDESIGN LAYER (JS) · 정보구조·흐름·컴포넌트 재구성
+   원본 함수/데이터/동기화 미변경 · 전부 기존 전역함수 호출 + 노드 이동만
+   ═══════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  function $(s,r){return (r||document).querySelector(s);}
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+  function go(id){ try{ window.goSection(id); }catch(e){} }
+  function focusSearch(){ go('home'); setTimeout(function(){var i=$('#ws-input'); if(i){i.focus();} var w=$('.ws-wrap'); if(w)w.scrollIntoView({behavior:'smooth',block:'center'});},120); }
+
+  /* ── QR 열기(자료 아코디언 펼치고 토글) ── */
+  function openQR(){
+    go('home');
+    setTimeout(function(){
+      var t=$('#qr-toggle');
+      if(t){ var acc=t.closest('.rz-acc'); if(acc && !acc.open) acc.open=true;
+        var p=$('#qr-panel'); if(p && (p.style.display==='none'||!p.style.display)){ try{window.toggleQR();}catch(e){} }
+        t.scrollIntoView({behavior:'smooth',block:'center'}); }
+    },140);
+  }
+
+  /* ═══════════ 1. 홈 정보구조 재구성 ═══════════ */
+  function makeAcc(ico,title,open){
+    var d=el('details','rz-acc'); if(open)d.open=true;
+    var s=el('summary',null,'<span class="rz-ico">'+ico+'</span><span>'+title+'</span><span class="rz-chev">▾</span>');
+    var b=el('div','rz-acc-body');
+    d.appendChild(s); d.appendChild(b);
+    return {d:d,body:b};
+  }
+  function restructureHome(){
+    var home=$('#home'); if(!home) return;
+    var hero=$('.hero',home);
+    var ws=$('.ws-wrap',home);
+    var dash=$('#sales-dash');
+    var demo=$('#demo-home'), newdev=$('#newdev-home'), adopt=$('#adoption-home');
+    var statrow=$('.stat-row',home);
+    var adminbar=$('#admin-bar');
+    var synch=$('#sync-home');
+    var btnrow=null;
+    home.querySelectorAll('.btn-row').forEach(function(r){ if(r.querySelector('button[onclick*="checklist"]')) btnrow=r; });
+
+    var known=[hero,ws,dash,demo,newdev,adopt,statrow,adminbar,synch,btnrow];
+    var rest=[];
+    Array.prototype.slice.call(home.children).forEach(function(c){ if(known.indexOf(c)===-1) rest.push(c); });
+
+    /* 재배치: 노드를 append하면 '이동'(복제X) → id·리스너·렌더내용 보존 */
+    if(hero) home.appendChild(hero);
+    home.appendChild(el('div','rz-eyebrow','오늘 현황'));
+    if(dash) home.appendChild(dash);                          // 오늘 목표·평균·방문·데모 (통합 Summary)
+    home.appendChild(el('div','rz-eyebrow','빠른 실행'));
+    if(btnrow){ btnrow.classList.add('rz-quick'); btnrow.style.flexDirection='column'; home.appendChild(btnrow); }
+    if(ws) home.appendChild(ws);                              // 검색(크게)
+
+    var a1=makeAcc('📊','오늘 데모 · 신규개발 · 도입현황',false);
+    [demo,newdev,adopt].forEach(function(n){ if(n)a1.body.appendChild(n); });
+    home.appendChild(a1.d);
+
+    var a2=makeAcc('📈','이번주 통계',false);
+    if(statrow)a2.body.appendChild(statrow);
+    home.appendChild(a2.d);
+
+    var a3=makeAcc('📄','현장 자료 · 계정 · 링크 · QR',false);
+    rest.forEach(function(n){ a3.body.appendChild(n); });     // 계정/시연계정/자료+QR/링크/셀링포인트
+    home.appendChild(a3.d);
+
+    var a4=makeAcc('🔒','관리자 · 동기화 상태',false);
+    if(adminbar)a4.body.appendChild(adminbar);
+    if(synch)a4.body.appendChild(synch);
+    home.appendChild(a4.d);
+  }
+
+  /* ═══════════ 2. 새 하단 네비게이션 ═══════════ */
+  var NAV=[
+    {k:'today', ic:'🏠', lb:'오늘',   fn:function(){go('home');}},
+    {k:'visit', ic:'🗺️', lb:'방문',   fn:function(){go('map');}},
+    {k:'search',ic:'🔎', lb:'검색',   fn:function(){focusSearch();}},
+    {k:'fb',    ic:'💬', lb:'피드백', fn:function(){go('feedback');}},
+    {k:'more',  ic:'⋯',  lb:'더보기', fn:function(){openSheet();}}
+  ];
+  function buildNav(){
+    var nav=el('div','rz-nav');
+    NAV.forEach(function(n){
+      var b=el('button','rz-nav-btn','<span class="rz-nav-ico">'+n.ic+'</span><span>'+n.lb+'</span>');
+      b.setAttribute('data-k',n.k);
+      b.addEventListener('click',n.fn);
+      nav.appendChild(b);
+    });
+    document.body.appendChild(nav);
+    syncNav('home');
+  }
+  function syncNav(sectionId){
+    var map={home:'today',map:'visit',feedback:'fb'};
+    var key=map[sectionId]||null;
+    document.querySelectorAll('.rz-nav-btn').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-k')===key);
+    });
+  }
+
+  /* ═══════════ 3. FAB ═══════════ */
+  var fabOpen=false;
+  function buildFab(){
+    var menu=el('div','rz-fab-menu');
+    var items=[
+      {ic:'✅',lb:'오늘 체크리스트',fn:function(){go('checklist');}},
+      {ic:'🗺️',lb:'방문 지도',      fn:function(){go('map');}},
+      {ic:'📝',lb:'데모 등록',      fn:function(){ try{window.goDemoMap();}catch(e){go('map');} }},
+      {ic:'🔎',lb:'공업사 검색',    fn:function(){focusSearch();}},
+      {ic:'📱',lb:'위페어 QR',      fn:function(){openQR();}}
+    ];
+    items.forEach(function(it){
+      var row=el('div','rz-fab-item');
+      var lbl=el('span','rz-fab-lbl',it.lb);
+      var btn=el('button','rz-fab-btn',it.ic); btn.type='button';
+      btn.addEventListener('click',function(){ it.fn(); toggleFab(false); });
+      row.appendChild(lbl); row.appendChild(btn);
+      menu.appendChild(row);
+    });
+    var fab=el('button','rz-fab','＋'); fab.type='button'; fab.id='rz-fab';
+    fab.addEventListener('click',function(){ toggleFab(!fabOpen); });
+    document.body.appendChild(menu);
+    document.body.appendChild(fab);
+    window._rzFabMenu=menu; window._rzFab=fab;
+  }
+  function toggleFab(on){
+    fabOpen=on;
+    if(window._rzFabMenu) window._rzFabMenu.classList.toggle('open',on);
+    if(window._rzFab) window._rzFab.classList.toggle('on',on);
+  }
+
+  /* ═══════════ 4. 더보기 Bottom Sheet ═══════════ */
+  function buildSheet(){
+    var scrim=el('div','rz-scrim'); scrim.id='rz-scrim';
+    var sheet=el('div','rz-sheet'); sheet.id='rz-sheet';
+    sheet.appendChild(el('div','rz-sheet-grab'));
+    sheet.appendChild(el('div','rz-sheet-ttl','더보기'));
+    var grid=el('div','rz-sheet-grid');
+    var cells=[
+      {ic:'📖',lb:'방문 가이드', fn:function(){go('guide');}},
+      {ic:'💬',lb:'공감 스크립트',fn:function(){go('empathy');}},
+      {ic:'✅',lb:'체크리스트',   fn:function(){go('checklist');}},
+      {ic:'🔍',lb:'공업사 DB조회',fn:function(){focusSearch();}},
+      {ic:'📱',lb:'위페어 QR',    fn:function(){openQR();}},
+      {ic:'🔒',lb:'관리자 모드',  admin:true, fn:function(){ try{window.openAdmin();}catch(e){} }}
+    ];
+    cells.forEach(function(c){
+      var cell=el('div','rz-sheet-cell'+(c.admin?' rz-admin':''),'<span class="rz-sc-ico">'+c.ic+'</span><span>'+c.lb+'</span>');
+      cell.addEventListener('click',function(){ closeSheet(); setTimeout(c.fn,180); });
+      grid.appendChild(cell);
+    });
+    sheet.appendChild(grid);
+    scrim.addEventListener('click',closeSheet);
+    document.body.appendChild(scrim);
+    document.body.appendChild(sheet);
+  }
+  function openSheet(){ var s=$('#rz-sheet'),c=$('#rz-scrim'); if(s)s.classList.add('open'); if(c)c.classList.add('open'); }
+  function closeSheet(){ var s=$('#rz-sheet'),c=$('#rz-scrim'); if(s)s.classList.remove('open'); if(c)c.classList.remove('open'); }
+
+  /* ═══════════ 5. 방문 리스트 · 점진적 공개 ═══════════ */
+  function enhanceRows(){
+    var list=$('#shop-list'); if(!list) return;
+    list.querySelectorAll('.si').forEach(function(row){
+      if(row.querySelector('.rz-exp')) return;
+      var ctrl=row.querySelector('.si-ctrl');
+      var b=el('button','rz-exp','▾'); b.type='button'; b.setAttribute('aria-label','상세 펼치기');
+      b.addEventListener('click',function(e){ e.stopPropagation(); row.classList.toggle('rz-open'); });
+      if(ctrl) row.insertBefore(b,ctrl); else row.appendChild(b);
+    });
+  }
+  function hookDrawList(){
+    if(typeof window.drawList==='function'){
+      var _dl=window.drawList;
+      window.drawList=function(d){ var r=_dl.apply(this,arguments); try{enhanceRows();}catch(e){} return r; };
+    }
+    try{ enhanceRows(); }catch(e){}
+  }
+
+  /* ═══════════ 6. goSection 래핑(네비 동기화) ═══════════ */
+  function hookGoSection(){
+    if(typeof window.goSection==='function'){
+      var _g=window.goSection;
+      window.goSection=function(id){ var r=_g.apply(this,arguments); try{syncNav(id);}catch(e){} try{toggleFab(false);}catch(e){} return r; };
+    }
+  }
+
+  /* ═══════════ 부팅 ═══════════ */
+  function boot(){
+    try{ restructureHome(); }catch(e){ console.warn('[rz] home',e); }
+    try{ buildNav(); }catch(e){ console.warn('[rz] nav',e); }
+    try{ buildFab(); }catch(e){ console.warn('[rz] fab',e); }
+    try{ buildSheet(); }catch(e){ console.warn('[rz] sheet',e); }
+    try{ hookGoSection(); }catch(e){ console.warn('[rz] goSec',e); }
+    try{ hookDrawList(); }catch(e){ console.warn('[rz] list',e); }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+
 </script>
 </body>
 </html>
